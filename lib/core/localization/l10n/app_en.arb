@@ -1,0 +1,8 @@
+{
+    "unknownError": "An unknown error occurred, please try again.",
+    "unexpectedError": "An unexpected error occurred.",
+    "cacheError": "Failed to load cached data.",
+    "networkError": "Please check your internet connection.",
+    "serverError": "Server error, please try again later.",
+    "authError": "Authentication failed, please try again."
+}
