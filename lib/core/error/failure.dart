@@ -1,3 +1,6 @@
+import 'package:learny/core/error/exceptions.dart';
+import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+
 abstract class Failure {
   final String message;
 
@@ -16,7 +19,61 @@ class NetworkFailure extends Failure {
   const NetworkFailure({required super.message});
 }
 
-class AuthFailure extends Failure {
-  final String code;
-  const AuthFailure({required this.code, required super.message});
+class AuthFailure implements Failure {
+  @override
+  final String message;
+
+  const AuthFailure._({required this.message});
+
+  factory AuthFailure.invalidCredentials() => AuthFailure._(
+    message: AppLocalizationsAr.instance.exAuthInvalidCredentials,
+  );
+
+  factory AuthFailure.emailAlreadyInUse() => AuthFailure._(
+    message: AppLocalizationsAr.instance.exAuthEmailAlreadyInUse,
+  );
+
+  factory AuthFailure.weakPassword() =>
+      AuthFailure._(message: AppLocalizationsAr.instance.exAuthWeakPassword);
+
+  factory AuthFailure.networkError() =>
+      AuthFailure._(message: AppLocalizationsAr.instance.exAuthNetworkError);
+
+  factory AuthFailure.tooManyRequests() =>
+      AuthFailure._(message: AppLocalizationsAr.instance.exAuthTooManyRequests);
+
+  factory AuthFailure.unknown([String? details]) => AuthFailure._(
+    message:
+        '${AppLocalizationsAr.instance.exAuthUnknownPrefix}${details != null ? ' $details' : ''}',
+  );
+
+  @override
+  String toString() => 'AuthFailure(message: $message)';
+}
+
+class AuthExceptionMapper {
+  static AuthFailure map(AuthException exception) {
+    switch (exception.code) {
+      case 'user-not-found':
+      case 'wrong-password':
+      case 'invalid-credential':
+        return AuthFailure.invalidCredentials();
+
+      case 'email-already-in-use':
+        return AuthFailure.emailAlreadyInUse();
+
+      case 'weak-password':
+        return AuthFailure.weakPassword();
+      case 'No_Internet_connection':
+      case 'The_connection_has_timed_out':
+      case 'network-request-failed':
+        return AuthFailure.networkError();
+
+      case 'too-many-requests':
+        return AuthFailure.tooManyRequests();
+
+      default:
+        return AuthFailure.unknown();
+    }
+  }
 }
