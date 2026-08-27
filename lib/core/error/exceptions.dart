@@ -1,21 +1,20 @@
 class AppException implements Exception {
-  final String message;
-  const AppException({required this.message});
+  final String code;
+  const AppException({required this.code});
 }
 
 class CacheException extends AppException {
-  const CacheException({required super.message});
+  const CacheException({required super.code});
 }
 
 class ServerException extends AppException {
-  const ServerException({required super.message});
+  const ServerException({required super.code});
 }
 
 class NetworkException extends AppException {
-  const NetworkException({required super.message});
+  const NetworkException({required super.code});
 }
 
 class AuthException extends AppException {
-  final String code;
-  const AuthException({required this.code, required super.message});
+  const AuthException({required super.code});
 }

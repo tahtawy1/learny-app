@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:learny/core/theme/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyles {
   AppTextStyles._();
 
-  static const String fontFamily = 'Cairo';
+  static String fontFamily = 'Cairo';
 
   /// 38 - App Logo
-  static const displayLarge = TextStyle(
-    fontFamily: fontFamily,
+  static final displayLarge = GoogleFonts.cairo(
     fontSize: 38,
-    fontWeight: FontWeight.w700,
-    height: 40 / 38,
-    letterSpacing: -0.5,
+    fontWeight: FontWeight.w500,
+
+    color: AppColors.primary,
+    height: 1.2,
   );
 
   /// 32 - Display Medium
-  static const displayMedium = TextStyle(
-    fontFamily: fontFamily,
+  static final displayMedium = GoogleFonts.cairo(
     fontSize: 32,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.5,
   );
 
   /// 30 - Screen Title
-  static const headlineLarge = TextStyle(
-    fontFamily: fontFamily,
+  static final headlineLarge = GoogleFonts.cairo(
     fontSize: 30,
     fontWeight: FontWeight.w700,
     height: 36 / 30,
@@ -32,8 +32,7 @@ class AppTextStyles {
   );
 
   /// 24 - Section Title
-  static const headlineMedium = TextStyle(
-    fontFamily: fontFamily,
+  static final headlineMedium = GoogleFonts.cairo(
     fontSize: 24,
     fontWeight: FontWeight.w700,
     height: 32 / 24,
@@ -41,8 +40,7 @@ class AppTextStyles {
   );
 
   /// 20 - Secondary Title
-  static const headlineSmall = TextStyle(
-    fontFamily: fontFamily,
+  static final headlineSmall = GoogleFonts.cairo(
     fontSize: 20,
     fontWeight: FontWeight.w700,
     height: 28 / 20,
@@ -50,8 +48,7 @@ class AppTextStyles {
   );
 
   /// 18 - Button / Card Title
-  static const titleLarge = TextStyle(
-    fontFamily: fontFamily,
+  static final titleLarge = GoogleFonts.cairo(
     fontSize: 18,
     fontWeight: FontWeight.w700,
     height: 28 / 18,
@@ -59,8 +56,7 @@ class AppTextStyles {
   );
 
   /// 14 - Small Button / Tab / Chip
-  static const titleMedium = TextStyle(
-    fontFamily: fontFamily,
+  static final titleMedium = GoogleFonts.cairo(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     height: 20 / 14,
@@ -68,15 +64,13 @@ class AppTextStyles {
   );
 
   /// 12 - Title Small
-  static const titleSmall = TextStyle(
-    fontFamily: fontFamily,
+  static final titleSmall = GoogleFonts.cairo(
     fontSize: 12,
     fontWeight: FontWeight.w600,
   );
 
   /// 16 - Body / Input Text
-  static const bodyLarge = TextStyle(
-    fontFamily: fontFamily,
+  static final bodyLarge = GoogleFonts.cairo(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     height: 24 / 16,
@@ -84,8 +78,7 @@ class AppTextStyles {
   );
 
   /// 15 - Description
-  static const bodyMedium = TextStyle(
-    fontFamily: fontFamily,
+  static final bodyMedium = GoogleFonts.cairo(
     fontSize: 15,
     fontWeight: FontWeight.w400,
     height: 24 / 15,
@@ -93,15 +86,13 @@ class AppTextStyles {
   );
 
   /// 12 - Body Small
-  static const bodySmall = TextStyle(
-    fontFamily: fontFamily,
+  static final bodySmall = GoogleFonts.cairo(
     fontSize: 12,
     fontWeight: FontWeight.w400,
   );
 
   /// 14 - Field Label
-  static const labelLarge = TextStyle(
-    fontFamily: fontFamily,
+  static final labelLarge = GoogleFonts.cairo(
     fontSize: 14,
     fontWeight: FontWeight.w700,
     height: 20 / 14,
@@ -109,8 +100,7 @@ class AppTextStyles {
   );
 
   /// 14 - Subtitle
-  static const labelMedium = TextStyle(
-    fontFamily: fontFamily,
+  static final labelMedium = GoogleFonts.cairo(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     height: 20 / 14,
@@ -118,15 +108,14 @@ class AppTextStyles {
   );
 
   /// 12 - Caption / Hint
-  static const labelSmall = TextStyle(
-    fontFamily: fontFamily,
+  static final labelSmall = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     height: 16 / 12,
     letterSpacing: 0,
   );
 
-  static const TextTheme textTheme = TextTheme(
+  static final TextTheme textTheme = TextTheme(
     displayLarge: displayLarge,
     displayMedium: displayMedium,
     headlineLarge: headlineLarge,

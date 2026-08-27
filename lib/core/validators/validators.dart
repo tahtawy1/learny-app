@@ -1,57 +1,108 @@
-import 'package:email_validator/email_validator.dart';
-import 'package:flutter/material.dart';
+import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 
-abstract final class Validators {
-  static String? validateRequired(BuildContext context, String? value) {
-    return _validateEmpty(context, value);
-  }
-
-  static String? validateName(BuildContext context, String? value) {
-    if (_validateEmpty(context, value) != null) {
-      return _validateEmpty(context, value);
+class AppValidators {
+  // ================= Email =================
+  static String? email(String? val) {
+    if (val == null || val.trim().isEmpty) {
+      return AppLocalizationsAr.instance.validationEnterEmail;
     }
 
-    if (value!.length < 2) {}
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+    if (!emailRegex.hasMatch(val)) {
+      return AppLocalizationsAr.instance.validationEmailInvalid;
+    }
 
     return null;
   }
 
-  static String? validateEmail(BuildContext context, String? value) {
-    if (_validateEmpty(context, value) != null) {
-      return _validateEmpty(context, value);
+  // ================= Password =================
+  static String? password(String? val) {
+    if (val == null || val.isEmpty) {
+      return AppLocalizationsAr.instance.validationEnterPassword;
     }
 
-    if (!EmailValidator.validate(value!)) {}
+    if (val.length < 6) {
+      return AppLocalizationsAr.instance.validationPasswordMinLength;
+    }
 
     return null;
   }
 
-  static String? validatePassword(BuildContext context, String? value) {
-    if (_validateEmpty(context, value) != null) {
-      return _validateEmpty(context, value);
+  // ================= Confirm Password =================
+  static String? confirmPassword(String? val, String password) {
+    if (val == null || val.isEmpty) {
+      return AppLocalizationsAr.instance.validationEnterPasswordConfirm;
     }
 
-    if (value!.length < 8) {}
+    if (val != password) {
+      return AppLocalizationsAr.instance.validationPasswordMismatch;
+    }
 
     return null;
   }
 
-  static String? validateConfirmPassword({
-    required String? value,
-    required String password,
-    required BuildContext context,
-  }) {
-    if (_validateEmpty(context, value) != null) {
-      return _validateEmpty(context, value);
+  // ================= Name =================
+  static String? name(String? val) {
+    if (val == null || val.trim().isEmpty) {
+      return AppLocalizationsAr.instance.validationEnterName;
     }
 
-    if (value != password) {}
+    if (val.length < 3) {
+      return AppLocalizationsAr.instance.validationNameTooShort;
+    }
 
     return null;
   }
 
-  static String? _validateEmpty(BuildContext context, String? value) {
-    if (value == null || value.trim().isEmpty) {}
+  // ─── Required Field ───
+  static String? requiredField(String? value, String fieldName) {
+    if (value == null || value.trim().isEmpty) {
+      return "${AppLocalizationsAr.instance.validationEnterFieldPrefix}$fieldName";
+    }
+    return null;
+  }
+
+  // ─── Number Validator ───
+  static String? number(String? value, String fieldName) {
+    if (value == null || value.trim().isEmpty) {
+      return "${AppLocalizationsAr.instance.validationEnterFieldPrefix}$fieldName";
+    }
+    if (double.tryParse(value) == null) {
+      return "$fieldName${AppLocalizationsAr.instance.validationFieldMustBeIntSuffix}";
+    }
+    return null;
+  }
+
+  // ─── Price Validator ───
+  static String? price(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizationsAr.instance.validationEnterPrice;
+    }
+    final number = double.tryParse(value);
+    if (number == null) {
+      return AppLocalizationsAr.instance.validationPriceMustBeNumber;
+    }
+    if (number <= 0) {
+      return AppLocalizationsAr.instance.validationPriceMustBeGreaterThanZero;
+    }
+    return null;
+  }
+
+  // ================= Phone =================
+  static String? phone(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppLocalizationsAr.instance.validationEnterPhone;
+    }
+
+    final phone = value.trim();
+
+    final phoneRegex = RegExp(r'^01[0125][0-9]{8}$');
+
+    if (!phoneRegex.hasMatch(phone)) {
+      return AppLocalizationsAr.instance.validationPhoneInvalid;
+    }
+
     return null;
   }
 }
