@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:learny/features/auth/domain/entities/auth_dependencies.dart';
+import 'package:learny/core/di/service_locator.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
 import 'package:learny/features/auth/presentation/view_model/email_verification_cubit/email_verification_cubit.dart';
 import 'package:learny/features/auth/presentation/view_model/forget_cubit/forget_cubit.dart';
@@ -11,6 +11,9 @@ import 'package:learny/features/auth/presentation/views/email_verification_page.
 import 'package:learny/features/auth/presentation/views/forget_page.dart';
 import 'package:learny/features/auth/presentation/views/login_page.dart';
 import 'package:learny/features/auth/presentation/views/register_page.dart';
+import 'package:learny/features/profile/presentation/view_model/profile_cubit.dart';
+import 'package:learny/features/profile/presentation/views/edit_profile_page.dart';
+import 'package:learny/features/profile/presentation/views/profile_page.dart';
 import 'package:learny/features/splash/presentation/views/splash_page.dart';
 
 class AppRouter {
@@ -27,10 +30,7 @@ class AppRouter {
         path: '/login',
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider<LoginCubit>(
-            create: (context) {
-              final authDependencies = AuthDependencies.create();
-              return LoginCubit(loginUsecase: authDependencies.loginUsecase);
-            },
+            create: (context) => getIt<LoginCubit>(),
             child: const LoginPage(),
           );
         },
@@ -39,13 +39,7 @@ class AppRouter {
             path: 'forget',
             builder: (BuildContext context, GoRouterState state) {
               return BlocProvider<ForgetCubit>(
-                create: (context) {
-                  final authDependencies = AuthDependencies.create();
-                  return ForgetCubit(
-                    sendPasswordResetEmailUseCase:
-                        authDependencies.sendPasswordResetEmailUseCase,
-                  );
-                },
+                create: (context) => getIt<ForgetCubit>(),
                 child: const ForgetPage(),
               );
             },
@@ -54,10 +48,7 @@ class AppRouter {
             path: 'register',
             builder: (BuildContext context, GoRouterState state) {
               return BlocProvider<RegisterCubit>(
-                create: (context) {
-                  final authDependencies = AuthDependencies.create();
-                  return RegisterCubit(authDependencies.registerUsecase);
-                },
+                create: (context) => getIt<RegisterCubit>(),
                 child: const RegisterPage(),
               );
             },
@@ -70,19 +61,24 @@ class AppRouter {
           final userEntity = state.extra as UserEntity;
 
           return BlocProvider<EmailVerificationCubit>(
-            create: (context) {
-              final authDependencies = AuthDependencies.create();
-              return EmailVerificationCubit(
-                isEmailVerifiedUseCase: authDependencies.isEmailVerifiedUseCase,
-                sendEmailVerificationUseCase:
-                    authDependencies.sendEmailVerificationUseCase,
-                reloadCurrentUserUseCase:
-                    authDependencies.reloadCurrentUserUseCase,
-              )..init();
-            },
+            create: (context) => getIt<EmailVerificationCubit>()..init(),
             child: EmailVerificationPage(userEntity: userEntity),
           );
         },
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => BlocProvider.value(
+          value: getIt<ProfileCubit>()..getCurrentUser(),
+          child: const ProfilePage(),
+        ),
+      ),
+      GoRoute(
+        path: '/edit_profile',
+        builder: (context, state) => BlocProvider.value(
+          value: getIt<ProfileCubit>(),
+          child: const EditProfilePage(),
+        ),
       ),
     ],
   );
