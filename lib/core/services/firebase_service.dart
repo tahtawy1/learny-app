@@ -46,6 +46,7 @@ class FirebaseService {
       email: data['email'] as String? ?? '',
       role: userRoleFromJson(data['role'] as String),
       name: data['name'] as String? ?? '',
+      phone: data['phone'] as String? ?? '',
       isBlock: data['isBlock'] as bool? ?? false,
       emailVerified: data['emailVerified'] as bool? ?? false,
     );
@@ -53,6 +54,28 @@ class FirebaseService {
 
   static String? getCurrentUserId() {
     return _auth.currentUser?.uid;
+  }
+
+  static Future<UserModel> updateUserProfile({required String name}) async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null) {
+        throw const AuthException(code: 'user_not_logged_in');
+      }
+
+      await user.updateDisplayName(name);
+      await _firebaseFirestore
+          .collection('users')
+          .doc(user.uid)
+          .update({'name': name});
+
+      return await getDataUserWithId(user.uid);
+    } on FirebaseException catch (e) {
+      throw AuthException(code: e.code);
+    } catch (e) {
+      if (e is AppException) rethrow;
+      throw AuthException(code: e.toString());
+    }
   }
 
   // ── Email Verification ─────────────────────────────────────────────────────
