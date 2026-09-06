@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
         if (state is LoginSuccess) {
           log(state.userModel.emailVerified.toString());
           if (state.userModel.emailVerified == true) {
-            context.go('/profile');
+            context.go('/courses');
           } else {
             context.push("/email_verification", extra: state.userModel);
           }

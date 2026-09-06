@@ -18,3 +18,7 @@ class NetworkException extends AppException {
 class AuthException extends AppException {
   const AuthException({required super.code});
 }
+
+class CourseException extends AppException {
+  const CourseException({required super.code});
+}

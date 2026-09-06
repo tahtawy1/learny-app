@@ -15,6 +15,13 @@ import 'package:learny/features/auth/presentation/view_model/email_verification_
 import 'package:learny/features/auth/presentation/view_model/forget_cubit/forget_cubit.dart';
 import 'package:learny/features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 import 'package:learny/features/auth/presentation/view_model/register_cubit/register_cubit.dart';
+
+import 'package:learny/features/courses/data/datasources/course_remote_data_source.dart';
+import 'package:learny/features/courses/data/datasources/course_remote_data_source_impl.dart';
+import 'package:learny/features/courses/data/repositories/course_repository_imp.dart';
+import 'package:learny/features/courses/domain/repositories/course_repository.dart';
+import 'package:learny/features/courses/domain/usecases/get_courses_usecase.dart';
+import 'package:learny/features/courses/presentation/view_model/cubit/course_cubit.dart';
 import 'package:learny/features/profile/data/datasource/profile_remote_data_source.dart';
 
 import 'package:learny/features/profile/data/repositories/profile_repository_impl.dart';
@@ -99,5 +106,23 @@ Future<void> setupLocators() async {
       updateUserProfileUseCase: getIt<UpdateUserProfileUseCase>(),
       logoutUseCase: getIt<LogoutUseCase>(),
     ),
+  );
+
+  // ==================== COURSES ====================
+
+  getIt.registerLazySingleton<CourseRemoteDataSource>(
+    () => CourseRemoteDataSourceImpl(),
+  );
+
+  getIt.registerLazySingleton<CourseRepository>(
+    () => CourseRepositoryImpl(remoteDataSource: getIt<CourseRemoteDataSource>()),
+  );
+
+  getIt.registerLazySingleton(
+    () => GetCoursesUsecase(repository: getIt<CourseRepository>()),
+  );
+
+  getIt.registerFactory(
+    () => CourseCubit(getCoursesUseCase: getIt<GetCoursesUsecase>()),
   );
 }

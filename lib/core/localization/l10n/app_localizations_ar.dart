@@ -106,4 +106,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String get formEmailVerificationPageResend => "إعادة إرسال الرابط";
   String get formForgetPageSuccessMessage =>
       "تم إرسال رابط استعادة كلمة المرور إلى بريدك الإلكتروني بنجاح.";
+
+  // ==================== Courses ====================
+
+  String get coursesPageTitle => 'استكشف الكورسات';
+  String get coursesSearchHint => 'ابحث عن كورس...';
+  String get coursesEmptyState => 'لا توجد كورسات متاحة';
+  String get coursesRetry => 'إعادة المحاولة';
+
+  // Filter bar
+  String get coursesFilterAll => 'الكل';
+  String get coursesFilterSecondGrade => 'الصف الثاني';
+  String get coursesFilterThirdGrade => 'الصف الثالث';
+
+  // Course card
+  String get courseCardStudentsSuffix => 'طالب';
+  String get courseCardHoursSuffix => 'ساعة';
+  String get courseCardCurrencySuffix => 'ج.م';
+  String get courseCardFree => 'مجاني';
+  String get courseCardViewContent => 'عرض المحتوى';
+  String get courseCardFreeEnroll => 'تسجيل مجاني';
+  String get courseCardBuy => 'شراء الكورس';
+
+  // Course failure messages
+  String get courseFailureNetwork => 'تأكد من اتصالك بالإنترنت';
+  String get courseFailureTimeout => 'انتهت مهلة الاتصال بالخادم';
+  String get courseFailureResourceExhausted => 'تم تجاوز الحد المسموح للطلبات';
+  String get courseFailureUnknown => 'حدث خطأ غير متوقع';
 }
