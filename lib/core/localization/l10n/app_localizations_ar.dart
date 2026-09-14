@@ -133,4 +133,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get courseFailureTimeout => 'انتهت مهلة الاتصال بالخادم';
   String get courseFailureResourceExhausted => 'تم تجاوز الحد المسموح للطلبات';
   String get courseFailureUnknown => 'حدث خطأ غير متوقع';
+
+  // ==================== My Courses ====================
+  String get myCoursesPageTitle => 'كورساتي';
+  String get myCoursesFilterAll => 'الكل';
+  String get myCoursesFilterInProgress => 'قيد التقدم';
+  String get myCoursesFilterCompleted => 'مكتملة';
+  String get myCoursesStatusInProgress => 'قيد التقدم';
+  String get myCoursesStatusCompleted => 'مكتملة';
+  String get myCoursesEmptyTitle => 'ابدأ رحلتك التعليمية';
+  String get myCoursesEmptySubtitle => 'لم تسجّل في أي كورس بعد';
+  String get myCoursesEmptyExploreButton => 'استكشاف الكورسات';
+  String get myCoursesContinueButton => 'متابعة';
+  String get myCoursesViewCertificate => 'عرض الشهادة';
+  String get myCoursesLessonSuffix => 'درس';
 }

@@ -13,6 +13,8 @@ import 'package:learny/features/auth/presentation/views/login_page.dart';
 import 'package:learny/features/auth/presentation/views/register_page.dart';
 import 'package:learny/features/courses/presentation/view_model/cubit/course_cubit.dart';
 import 'package:learny/features/courses/presentation/views/courses_page.dart';
+import 'package:learny/features/courses/presentation/views/my_courses_page.dart';
+import 'package:learny/features/enrollment/presentation/cubit/enrollment_cubit.dart';
 import 'package:learny/features/profile/presentation/view_model/profile_cubit.dart';
 import 'package:learny/features/profile/presentation/views/edit_profile_page.dart';
 import 'package:learny/features/profile/presentation/views/profile_page.dart';
@@ -20,7 +22,7 @@ import 'package:learny/features/splash/presentation/views/splash_page.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/splash',
+    initialLocation: '/my_courses',
     routes: [
       GoRoute(
         path: '/splash',
@@ -87,6 +89,13 @@ class AppRouter {
         builder: (context, state) => BlocProvider<CourseCubit>(
           create: (context) => getIt<CourseCubit>()..getCourses(),
           child: const CoursesPage(),
+        ),
+      ),
+      GoRoute(
+        path: '/my_courses',
+        builder: (context, state) => BlocProvider<EnrollmentCubit>(
+          create: (context) => getIt<EnrollmentCubit>(),
+          child: const MyCoursesPage(),
         ),
       ),
     ],

@@ -22,6 +22,11 @@ import 'package:learny/features/courses/data/repositories/course_repository_imp.
 import 'package:learny/features/courses/domain/repositories/course_repository.dart';
 import 'package:learny/features/courses/domain/usecases/get_courses_usecase.dart';
 import 'package:learny/features/courses/presentation/view_model/cubit/course_cubit.dart';
+import 'package:learny/features/enrollment/data/datasources/enrollment_remote_data_source.dart';
+import 'package:learny/features/enrollment/domain/repositories/enrollment_repository.dart';
+import 'package:learny/features/enrollment/domain/usecases/get_my_enrollments_usecase.dart';
+import 'package:learny/features/enrollment/presentation/cubit/enrollment_cubit.dart';
+import 'package:learny/features/enrollment/repositories/enrollment_repository_impl.dart';
 import 'package:learny/features/profile/data/datasource/profile_remote_data_source.dart';
 
 import 'package:learny/features/profile/data/repositories/profile_repository_impl.dart';
@@ -115,7 +120,8 @@ Future<void> setupLocators() async {
   );
 
   getIt.registerLazySingleton<CourseRepository>(
-    () => CourseRepositoryImpl(remoteDataSource: getIt<CourseRemoteDataSource>()),
+    () =>
+        CourseRepositoryImpl(remoteDataSource: getIt<CourseRemoteDataSource>()),
   );
 
   getIt.registerLazySingleton(
@@ -124,5 +130,26 @@ Future<void> setupLocators() async {
 
   getIt.registerFactory(
     () => CourseCubit(getCoursesUseCase: getIt<GetCoursesUsecase>()),
+  );
+
+  // ==================== ENROLLMENT ====================
+
+  getIt.registerLazySingleton<EnrollmentRemoteDataSource>(
+    () => EnrollmentRemoteDataSourceImpl(),
+  );
+
+  getIt.registerLazySingleton<EnrollmentRepository>(
+    () => EnrollmentRepositoryImpl(getIt<EnrollmentRemoteDataSource>()),
+  );
+
+  getIt.registerLazySingleton<GetMyEnrollmentsUseCase>(
+    () => GetMyEnrollmentsUseCase(getIt<EnrollmentRepository>()),
+  );
+
+  getIt.registerFactory<EnrollmentCubit>(
+    () => EnrollmentCubit(
+      getMyEnrollmentsUseCase: getIt<GetMyEnrollmentsUseCase>(),
+      getCoursesUseCase: getIt<GetCoursesUsecase>(),
+    ),
   );
 }
