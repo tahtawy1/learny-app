@@ -47,9 +47,8 @@ dependencies:
   google_fonts: ^8.2.1
   bloc: ^9.2.1
   equatable: ^2.1.0
-  video_player: ^2.11.1
+  video_player: ^2.9.2
   youtube_player_flutter: ^10.0.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

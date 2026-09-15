@@ -73,6 +73,7 @@ class _MyCoursesPageState extends State<MyCoursesPage> {
           if (state is EnrollmentSuccess) {
             return MyCoursesBody(
               enrollments: state.enrollments,
+              coursesMap: state.coursesMap,
               selectedFilter: state.selectedFilter,
             );
           }

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learny/features/courses/domain/entities/course_entity.dart';
 import 'package:learny/features/courses/domain/usecases/get_courses_usecase.dart';
 import 'package:learny/features/enrollment/domain/entities/enrollment_entity.dart';
 import 'package:learny/features/enrollment/domain/enums/enrollment_status.dart';
@@ -15,6 +16,7 @@ class EnrollmentCubit extends Cubit<EnrollmentState> {
   }) : super(const EnrollmentInitial());
 
   List<EnrollmentEntity> _allEnrollments = [];
+  Map<String, CourseEntity> _coursesMap = {};
   EnrollmentFilter _currentFilter = EnrollmentFilter.all;
 
   EnrollmentFilter get currentFilter => _currentFilter;
@@ -33,34 +35,26 @@ class EnrollmentCubit extends Cubit<EnrollmentState> {
       (enrollments) async {
         if (enrollments.isEmpty) {
           _allEnrollments = [];
+          _coursesMap = {};
           emit(const EnrollmentEmpty());
           return;
         }
 
-        // Single batch fetch of courses to enrich enrollments with title/image
-        // Avoids N+1 — one getCourses call total
-        List<EnrollmentEntity> enrichedEnrollments = enrollments;
+        _allEnrollments = enrollments;
+        _coursesMap = {};
+
         if (getCoursesUseCase != null) {
           final coursesResult = await getCoursesUseCase!();
           if (!isClosed) {
             coursesResult.fold(
               (_) {},
               (courses) {
-                final courseMap = {for (final c in courses) c.id: c};
-                enrichedEnrollments = enrollments.map((e) {
-                  final course = courseMap[e.courseId];
-                  if (course == null) return e;
-                  return e.copyWith(
-                    courseTitle: e.courseTitle ?? course.title,
-                    courseImageUrl: e.courseImageUrl ?? course.imageUrl,
-                  );
-                }).toList();
+                _coursesMap = {for (final c in courses) c.id: c};
               },
             );
           }
         }
 
-        _allEnrollments = enrichedEnrollments;
         _emitFilteredState();
       },
     );
@@ -91,6 +85,7 @@ class EnrollmentCubit extends Cubit<EnrollmentState> {
 
     emit(EnrollmentSuccess(
       enrollments: filtered,
+      coursesMap: _coursesMap,
       selectedFilter: _currentFilter,
     ));
   }

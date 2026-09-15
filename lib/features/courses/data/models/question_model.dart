@@ -11,7 +11,17 @@ class QuestionModel extends QuestionEntity {
     super.userAnswer,
     super.answerExplanation,
   });
-
+   factory QuestionModel.fromEntity(QuestionEntity entity) {
+    return QuestionModel(
+      id: entity.id,
+      question: entity.question,
+      options: entity.options,
+      correctAnswer: entity.correctAnswer,
+      score: entity.score,
+      userAnswer: entity.userAnswer,
+      answerExplanation: entity.answerExplanation,
+    );
+  }
   factory QuestionModel.fromJson(Map<String, dynamic> json) {
     return QuestionModel(
       id: json['id'],

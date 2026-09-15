@@ -11,8 +11,6 @@ class EnrollmentEntity {
   final String lastAccessedLessonId;
   final DateTime lastAccessAt;
   final DateTime updatedAt;
-  final String? courseTitle;
-  final String? courseImageUrl;
 
   EnrollmentEntity({
     required this.id,
@@ -25,8 +23,6 @@ class EnrollmentEntity {
     required this.lastAccessAt,
     required this.lastAccessedLessonId,
     required this.updatedAt,
-    this.courseTitle,
-    this.courseImageUrl,
   });
 
   double get progress => totalLessonsCount > 0
@@ -47,8 +43,6 @@ class EnrollmentEntity {
     String? lastAccessedLessonId,
     DateTime? lastAccessAt,
     DateTime? updatedAt,
-    String? courseTitle,
-    String? courseImageUrl,
   }) {
     return EnrollmentEntity(
       id: id ?? this.id,
@@ -63,8 +57,6 @@ class EnrollmentEntity {
           lastAccessedLessonId ?? this.lastAccessedLessonId,
       lastAccessAt: lastAccessAt ?? this.lastAccessAt,
       updatedAt: updatedAt ?? this.updatedAt,
-      courseTitle: courseTitle ?? this.courseTitle,
-      courseImageUrl: courseImageUrl ?? this.courseImageUrl,
     );
   }
 }

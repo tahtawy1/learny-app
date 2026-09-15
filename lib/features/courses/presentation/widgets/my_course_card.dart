@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
 import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 import 'package:learny/core/theme/app_colors.dart';
+import 'package:learny/features/courses/domain/entities/course_entity.dart';
 import 'package:learny/features/enrollment/domain/entities/enrollment_entity.dart';
 
 class MyCourseCard extends StatelessWidget {
   const MyCourseCard({
     super.key,
     required this.enrollment,
+    this.course,
     this.onContinue,
   });
 
   final EnrollmentEntity enrollment;
+  final CourseEntity? course;
   final VoidCallback? onContinue;
 
   @override
@@ -43,10 +46,9 @@ class MyCourseCard extends StatelessWidget {
           SizedBox(
             height: 120,
             width: double.infinity,
-            child: enrollment.courseImageUrl != null &&
-                    enrollment.courseImageUrl!.isNotEmpty
+            child: (course?.imageUrl.isNotEmpty ?? false)
                 ? Image.network(
-                    enrollment.courseImageUrl!,
+                    course!.imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => _PlaceholderImage(context),
                   )
@@ -65,7 +67,7 @@ class MyCourseCard extends StatelessWidget {
 
                 // ── Course title ──────────────────────────────────
                 Text(
-                  enrollment.courseTitle ?? enrollment.courseId,
+                  course?.title ?? enrollment.courseId,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.right,

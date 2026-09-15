@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
 import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 import 'package:learny/core/theme/app_colors.dart';
+import 'package:learny/features/courses/domain/entities/course_entity.dart';
 import 'package:learny/features/enrollment/domain/entities/enrollment_entity.dart';
 import 'package:learny/features/enrollment/domain/enums/enrollment_status.dart';
 import 'package:learny/features/enrollment/presentation/cubit/enrollment_cubit.dart';
@@ -13,10 +14,12 @@ class MyCoursesBody extends StatelessWidget {
   const MyCoursesBody({
     super.key,
     required this.enrollments,
+    this.coursesMap = const {},
     required this.selectedFilter,
   });
 
   final List<EnrollmentEntity> enrollments;
+  final Map<String, CourseEntity> coursesMap;
   final EnrollmentFilter selectedFilter;
 
   @override
@@ -58,8 +61,10 @@ class MyCoursesBody extends StatelessWidget {
                     separatorBuilder: (context, index) => const SizedBox(height: 16),
                     itemBuilder: (context, index) {
                       final enrollment = enrollments[index];
+                      final course = coursesMap[enrollment.courseId];
                       return MyCourseCard(
                         enrollment: enrollment,
+                        course: course,
                         // TODO: wire to course detail route when available
                         onContinue: null,
                       );

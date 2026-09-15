@@ -14,8 +14,6 @@ class EnrollmentModel extends EnrollmentEntity {
     required super.lastAccessAt,
     required super.lastAccessedLessonId,
     required super.updatedAt,
-    super.courseTitle,
-    super.courseImageUrl,
   });
 
   factory EnrollmentModel.fromEntity(EnrollmentEntity entity) {
@@ -30,8 +28,6 @@ class EnrollmentModel extends EnrollmentEntity {
       lastAccessAt: entity.lastAccessAt,
       lastAccessedLessonId: entity.lastAccessedLessonId,
       updatedAt: entity.updatedAt,
-      courseTitle: entity.courseTitle,
-      courseImageUrl: entity.courseImageUrl,
     );
   }
 
@@ -63,8 +59,6 @@ class EnrollmentModel extends EnrollmentEntity {
       lastAccessedLessonId:
           (json['lastAccessedLessonId'] as String?) ?? '',
       updatedAt: _parseDateTime(json['updatedAt']),
-      courseTitle: json['courseTitle'] as String?,
-      courseImageUrl: json['courseImageUrl'] as String?,
     );
   }
 
@@ -80,8 +74,6 @@ class EnrollmentModel extends EnrollmentEntity {
       'lastAccessAt': lastAccessAt.toIso8601String(),
       'lastAccessedLessonId': lastAccessedLessonId,
       'updatedAt': updatedAt.toIso8601String(),
-      if (courseTitle != null) 'courseTitle': courseTitle,
-      if (courseImageUrl != null) 'courseImageUrl': courseImageUrl,
     };
   }
 
@@ -97,8 +89,6 @@ class EnrollmentModel extends EnrollmentEntity {
       lastAccessAt: lastAccessAt,
       lastAccessedLessonId: lastAccessedLessonId,
       updatedAt: updatedAt,
-      courseTitle: courseTitle,
-      courseImageUrl: courseImageUrl,
     );
   }
 }

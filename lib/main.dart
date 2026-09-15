@@ -5,6 +5,5 @@ import 'package:learny/core/di/service_locator.dart';
 
 void main() async {
   await AppInitializer().initApp();
-  await setupLocators();
   runApp(const App());
 }

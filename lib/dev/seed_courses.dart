@@ -291,8 +291,6 @@ Future<void> runSeedCourses({
     lastAccessAt: now,
     lastAccessedLessonId: kL1Vid2,
     updatedAt: now,
-    courseTitle: course1.title,
-    courseImageUrl: course1.imageUrl,
   );
 
   final enrollment2 = EnrollmentModel(
@@ -306,8 +304,6 @@ Future<void> runSeedCourses({
     lastAccessAt: now,
     lastAccessedLessonId: kL2Exam1,
     updatedAt: now,
-    courseTitle: course2.title,
-    courseImageUrl: course2.imageUrl,
   );
 
   await db.collection('enrollments').doc(kEnroll1Id).set(enrollment1.toJson());

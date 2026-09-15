@@ -70,13 +70,16 @@ class _DirectVideoPlayerState extends State<DirectVideoPlayer> {
         _controller!.addListener(_onControllerUpdate);
         _startHideTimer();
       }
-    } catch (_) {
-      if (mounted) {
-        setState(() {
-          _hasError = true;
-        });
-      }
-    }
+   } catch (e, st) {
+  debugPrint('VIDEO ERROR: $e');
+  debugPrintStack(stackTrace: st);
+
+  if (mounted) {
+    setState(() {
+      _hasError = true;
+    });
+  }
+}
   }
 
   void _startHideTimer() {
