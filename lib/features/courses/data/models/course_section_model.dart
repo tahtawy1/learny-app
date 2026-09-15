@@ -10,7 +10,16 @@ class CourseSectionModel extends CourseSectionEntity {
 
     required super.lessons,
   });
+  factory CourseSectionModel.fromEntity(CourseSectionEntity entity) {
+    return CourseSectionModel(
+      id: entity.id,
+      courseId: entity.courseId,
+      title: entity.title,
+      description: entity.description,
 
+      lessons: entity.lessons.map((e) => LessonModel.fromEntity(e)).toList(),
+    );
+  }
   factory CourseSectionModel.fromJson(Map<String, dynamic> json) {
     return CourseSectionModel(
       id: json['id'],
@@ -31,7 +40,9 @@ class CourseSectionModel extends CourseSectionEntity {
       'title': title,
       'description': description,
 
-      'lessons': lessons.map((e) => e.toJson()).toList(),
+      'lessons': lessons
+          .map((e) => LessonModel.fromEntity(e).toJson())
+          .toList(),
     };
   }
 }

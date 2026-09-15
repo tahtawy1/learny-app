@@ -1,7 +1,10 @@
 import 'package:learny/features/courses/data/models/lesson_model.dart';
+import 'package:learny/features/courses/domain/entities/video_lesson_entity.dart';
 
-class VideoLessonModel extends LessonModel {
+class VideoLessonModel extends LessonModel implements VideoLessonEntity {
+  @override
   final String videoUrl;
+  @override
   final int durationMinutes;
 
   VideoLessonModel({
@@ -14,7 +17,18 @@ class VideoLessonModel extends LessonModel {
     required this.videoUrl,
     required this.durationMinutes,
   });
+  factory VideoLessonModel.fromEntity(VideoLessonEntity entity) {
+    return VideoLessonModel(
+      id: entity.id,
+      title: entity.title,
 
+      type: entity.type,
+      isLocked: entity.isLocked,
+      isCompleted: entity.isCompleted,
+      videoUrl: entity.videoUrl,
+      durationMinutes: entity.durationMinutes,
+    );
+  }
   @override
   Map<String, dynamic> toJson() {
     return {

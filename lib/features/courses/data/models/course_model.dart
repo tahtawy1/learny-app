@@ -59,7 +59,9 @@ class CourseModel extends CourseEntity {
       'categoryId': categoryId,
       'price': price,
       'oldPrice': oldPrice,
-      'courseSections': courseSections.map((e) => e.toJson()).toList(),
+      'courseSections': courseSections
+          .map((e) => CourseSectionModel.fromEntity(e).toJson())
+          .toList(),
       'durationMinutes': durationMinutes,
       'studentsCount': studentsCount,
       'isFree': isFree,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
 import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
+import 'package:learny/features/courses/presentation/views/course_details_page.dart';
 
 class CourseCard extends StatelessWidget {
   const CourseCard({super.key, required this.course});
@@ -28,19 +30,9 @@ class CourseCard extends StatelessWidget {
           // صورة الكورس
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.network(
-              course.imageUrl,
-              height: 150,
-              fit: BoxFit.cover,
-              errorBuilder: (ctx, err, st) => Container(
-                height: 150,
-                color: context.colors.primaryContainer,
-                child: Icon(
-                  Icons.book_rounded,
-                  size: 60,
-                  color: context.colors.primary,
-                ),
-              ),
+            child: SizedBox(
+              height: 180,
+              child: ImagePlaceholder(courseEntity: course),
             ),
           ),
           // معلومات الكورس
@@ -52,7 +44,7 @@ class CourseCard extends StatelessWidget {
                 Text(
                   course.title,
                   textAlign: TextAlign.right,
-                  style: context.textStyle.titleMedium?.copyWith(
+                  style: context.textStyle.titleLarge?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -67,24 +59,26 @@ class CourseCard extends StatelessWidget {
                 const SizedBox(height: 12),
                 // مدة الكورس وعدد الطلاب
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _InfoChip(
                       icon: Icons.people_outline,
-                      label: '${course.studentsCount} ${AppLocalizationsAr.instance.courseCardStudentsSuffix}',
+                      label:
+                          '${course.studentsCount} ${AppLocalizationsAr.instance.courseCardStudentsSuffix}',
                       color: context.colors.primary,
                     ),
                     const SizedBox(width: 12),
                     _InfoChip(
                       icon: Icons.access_time,
-                      label: '${course.durationMinutes} ${AppLocalizationsAr.instance.courseCardHoursSuffix}',
+                      label:
+                          '${course.durationMinutes} ${AppLocalizationsAr.instance.courseCardHoursSuffix}',
                       color: context.colors.primary,
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 5),
                 const Divider(),
-                const SizedBox(height: 8),
+                const SizedBox(height: 5),
                 // السعر وخصم إن وجد
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -93,7 +87,9 @@ class CourseCard extends StatelessWidget {
                       Text(
                         '${course.oldPrice!.toStringAsFixed(0)} ${AppLocalizationsAr.instance.courseCardCurrencySuffix}',
                         style: context.textStyle.bodySmall?.copyWith(
-                          color: context.colors.onSurface.withValues(alpha: 0.4),
+                          color: context.colors.onSurface.withValues(
+                            alpha: 0.4,
+                          ),
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
@@ -103,7 +99,7 @@ class CourseCard extends StatelessWidget {
                       course.isFree
                           ? AppLocalizationsAr.instance.courseCardFree
                           : '${course.price.toStringAsFixed(0)} ${AppLocalizationsAr.instance.courseCardCurrencySuffix}',
-                      style: context.textStyle.titleMedium?.copyWith(
+                      style: context.textStyle.titleLarge?.copyWith(
                         color: context.colors.primary,
                         fontWeight: FontWeight.w800,
                       ),
@@ -116,7 +112,9 @@ class CourseCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push('/course_details', extra: course);
+                        },
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(color: context.colors.primary),
                           shape: RoundedRectangleBorder(
@@ -180,10 +178,11 @@ class _InfoChip extends StatelessWidget {
           label,
           style: context.textStyle.bodySmall?.copyWith(
             color: context.colors.onSurface.withValues(alpha: 0.6),
+            fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(width: 4),
-        Icon(icon, size: 16, color: color),
+        Icon(icon, size: 20, color: color),
       ],
     );
   }
