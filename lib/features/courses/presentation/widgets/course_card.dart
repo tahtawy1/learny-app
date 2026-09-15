@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
 import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
@@ -71,13 +72,15 @@ class CourseCard extends StatelessWidget {
                   children: [
                     _InfoChip(
                       icon: Icons.people_outline,
-                      label: '${course.studentsCount} ${AppLocalizationsAr.instance.courseCardStudentsSuffix}',
+                      label:
+                          '${course.studentsCount} ${AppLocalizationsAr.instance.courseCardStudentsSuffix}',
                       color: context.colors.primary,
                     ),
                     const SizedBox(width: 12),
                     _InfoChip(
                       icon: Icons.access_time,
-                      label: '${course.durationMinutes} ${AppLocalizationsAr.instance.courseCardHoursSuffix}',
+                      label:
+                          '${course.durationMinutes} ${AppLocalizationsAr.instance.courseCardHoursSuffix}',
                       color: context.colors.primary,
                     ),
                   ],
@@ -93,7 +96,9 @@ class CourseCard extends StatelessWidget {
                       Text(
                         '${course.oldPrice!.toStringAsFixed(0)} ${AppLocalizationsAr.instance.courseCardCurrencySuffix}',
                         style: context.textStyle.bodySmall?.copyWith(
-                          color: context.colors.onSurface.withValues(alpha: 0.4),
+                          color: context.colors.onSurface.withValues(
+                            alpha: 0.4,
+                          ),
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
@@ -116,7 +121,9 @@ class CourseCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push('/course_details', extra: course);
+                        },
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(color: context.colors.primary),
                           shape: RoundedRectangleBorder(

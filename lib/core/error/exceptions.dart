@@ -37,6 +37,9 @@ class EnrollmentExceptionMapper {
       case 'No_Internet_connection':
         return EnrollmentFailure.networkError();
 
+      case 'user_not_logged_in':
+        return EnrollmentFailure.unauthorized();
+
       default:
         return EnrollmentFailure.unknown();
     }

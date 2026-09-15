@@ -120,6 +120,9 @@ class EnrollmentFailure extends Failure {
   factory EnrollmentFailure.networkError() =>
       EnrollmentFailure(message: AppLocalizationsAr.instance.networkError);
 
+  factory EnrollmentFailure.unauthorized() =>
+      const EnrollmentFailure(message: 'يرجى تسجيل الدخول لعرض دوراتك');
+
   factory EnrollmentFailure.unknown() =>
       EnrollmentFailure(message: AppLocalizationsAr.instance.unexpectedError);
 }

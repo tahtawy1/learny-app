@@ -1,20 +1,22 @@
 import 'package:learny/features/courses/data/models/lesson_model.dart';
 import 'package:learny/features/courses/domain/entities/exam_lesson_entity.dart';
 
-class ExamLessonModel extends LessonModel {
+class ExamLessonModel extends LessonModel implements ExamLessonEntity {
   /// عدد أسئلة الامتحان
+  @override
   final int questionsCount;
 
   /// الدرجة الكلية للامتحان
+  @override
   final double totalScore;
 
   /// مدة الامتحان بالدقائق
+  @override
   final int durationMinutes;
 
   ExamLessonModel({
     required super.id,
     required super.title,
-
     required super.type,
     required super.isLocked,
     required super.isCompleted,
@@ -22,6 +24,7 @@ class ExamLessonModel extends LessonModel {
     required this.totalScore,
     required this.durationMinutes,
   });
+
   factory ExamLessonModel.fromEntity(ExamLessonEntity entity) {
     return ExamLessonModel(
       id: entity.id,
@@ -34,12 +37,12 @@ class ExamLessonModel extends LessonModel {
       durationMinutes: entity.durationMinutes,
     );
   }
+
   @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
-
       'type': type.name,
       'isLocked': isLocked,
       'isCompleted': isCompleted,

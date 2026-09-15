@@ -139,9 +139,9 @@ class _EmptyFiltered extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizationsAr.instance;
     final message = filter == EnrollmentFilter.completed
-        ? 'لم تُكمل أي كورس بعد'
+        ? loc.myCoursesEmptyCompleted
         : filter == EnrollmentFilter.inProgress
-            ? 'لا توجد كورسات قيد التقدم'
+            ? loc.myCoursesEmptyInProgress
             : loc.myCoursesEmptySubtitle;
 
     return Center(

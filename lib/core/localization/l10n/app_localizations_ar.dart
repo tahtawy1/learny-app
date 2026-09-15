@@ -143,8 +143,51 @@ class AppLocalizationsAr extends AppLocalizations {
   String get myCoursesStatusCompleted => 'مكتملة';
   String get myCoursesEmptyTitle => 'ابدأ رحلتك التعليمية';
   String get myCoursesEmptySubtitle => 'لم تسجّل في أي كورس بعد';
+  String get myCoursesEmptyCompleted => 'لم تُكمل أي كورس بعد';
+  String get myCoursesEmptyInProgress => 'لا توجد كورسات قيد التقدم';
   String get myCoursesEmptyExploreButton => 'استكشاف الكورسات';
   String get myCoursesContinueButton => 'متابعة';
   String get myCoursesViewCertificate => 'عرض الشهادة';
   String get myCoursesLessonSuffix => 'درس';
+
+  // ==================== Course Details & Lessons ====================
+  String get courseDetailsTabCurriculum => 'المحتوى';
+  String get courseDetailsTabOverview => 'التفاصيل';
+  String get courseDetailsTabReviews => 'التقييمات';
+  String get courseDetailsNoContent => 'لا يوجد محتوى متاح حالياً';
+  String get courseDetailsAbout => 'عن الكورس';
+  String get courseDetailsDefaultDescription =>
+      'شرح تفصيلي وشامل لمقرر الأحياء مع التركيز على الفهم والتطبيق العملي وحل الأسئلة والامتحانات التدريبية للتفوق في الثانوية العامة.';
+  String get courseDetailsWhatYouWillGet => 'ماذا ستحصل في هذا الكورس؟';
+  String get courseDetailsFeatureVideos => 'فيديوهات شرح بجودة عالية';
+  String get courseDetailsFeaturePdfs => 'مذكرات وملخصات بصيغة PDF';
+  String get courseDetailsFeatureQuizzes => 'اختبارات تقييمية بعد كل درس';
+  String get courseDetailsFeatureAccess =>
+      'وصول غير محدود للمحتوى في أي وقت';
+  String get courseDetailsReviewsBasedOn => 'بناءً على 128 تقييم';
+  String get courseDetailsContinueLearning => 'متابعة التعلم';
+  String get courseMinutesSuffix => 'دقيقة';
+  String get courseLessonsSuffix => 'دروس';
+  String get courseQuestionsSuffix => 'أسئلة';
+  String get courseEducationalFile => 'ملف تعليمي';
+  String get courseMegabyteSuffix => 'ميجابايت';
+
+  // Lesson Pages & Navigation
+  String get lessonTypeNotSupported => 'نوع الدرس غير مدعوم';
+  String get pdfLessonPrefix => 'درس PDF';
+  String get quizLessonPrefix => 'اختبار';
+  String get lessonAttachmentsTitle => 'المرفقات';
+  String get lessonDefaultAttachmentName => 'ملخص الدرس.pdf';
+  String get lessonNavigationPrevious => 'الدرس السابق';
+  String get lessonNavigationNext => 'الدرس التالي';
+  String get videoLessonDefaultDescription =>
+      'في هذا الدرس، سنقوم بشرح وتفصيل المحتوى التعليمي مع توضيح أهم النقاط الأساسية والتطبيقية لمساعدتك على التفوق.';
+  String get videoLessonCompleted => 'تم الإكمال بنجاح';
+  String get videoLessonMarkAsCompleted => 'تمييز كمكتمل';
+
+  // Video Player
+  String get videoPlayerError => 'تعذر تشغيل الفيديو';
+  String get videoPlayerUnmute => 'إلغاء كتم الصوت';
+  String get videoPlayerMute => 'كتم الصوت';
+  String get videoPlayerPlaybackSpeed => 'سرعة التشغيل';
 }
