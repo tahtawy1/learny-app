@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/const/lesson_type.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
 import 'package:learny/features/courses/domain/entities/course_section_entity.dart';
@@ -62,64 +62,64 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
     final hours = (course.durationMinutes / 60).toStringAsFixed(0);
 
     return Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.only(bottom: 24),
-              child: Column(
-                children: [
-                  // ── Top Gradient Header + Title + Back Button ────────────
-                  _HeaderSection(
-                    title: course.title,
-                    onBack: () => context.pop(),
-                  ),
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.only(bottom: 24),
+            child: Column(
+              children: [
+                // ── Top Gradient Header + Title + Back Button ────────────
+                _HeaderSection(
+                  title: course.title,
+                  onBack: () => context.pop(),
+                ),
 
-                  // ── Floating Stats Card (Overlapping header) ────────────
-                  Transform.translate(
-                    offset: const Offset(0, -32),
-                    child: _FloatingStatsCard(
-                      hours: hours == '0' ? '12' : hours,
-                      lessonsCount: totalLessons == 0 ? 24 : totalLessons,
-                    ),
+                // ── Floating Stats Card (Overlapping header) ────────────
+                Transform.translate(
+                  offset: const Offset(0, -32),
+                  child: _FloatingStatsCard(
+                    hours: hours == '0' ? '12' : hours,
+                    lessonsCount: totalLessons == 0 ? 24 : totalLessons,
                   ),
+                ),
 
-                  // ── Tab Bar ──────────────────────────────────────────────
-                  Transform.translate(
-                    offset: const Offset(0, -16),
-                    child: Column(
-                      children: [
-                        _TabBar(
-                          selectedTab: _selectedTab,
-                          onTabSelected: (index) {
-                            setState(() => _selectedTab = index);
-                          },
-                        ),
-                        const SizedBox(height: 16),
+                // ── Tab Bar ──────────────────────────────────────────────
+                Transform.translate(
+                  offset: const Offset(0, -16),
+                  child: Column(
+                    children: [
+                      _TabBar(
+                        selectedTab: _selectedTab,
+                        onTabSelected: (index) {
+                          setState(() => _selectedTab = index);
+                        },
+                      ),
+                      const SizedBox(height: 16),
 
-                        // ── Tab Content ────────────────────────────────────
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: _buildTabContent(),
-                        ),
-                      ],
-                    ),
+                      // ── Tab Content ────────────────────────────────────
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: _buildTabContent(),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
+        ),
 
-          // ── Sticky Bottom Action Button ──────────────────────────────────
-          _BottomBar(
-            onContinue: () {
-              final lesson = _findFirstPlayableLesson();
-              if (lesson != null) {
-                context.push('/lesson_details', extra: lesson);
-              }
-            },
-          ),
-        ],
-      );
+        // ── Sticky Bottom Action Button ──────────────────────────────────
+        _BottomBar(
+          onContinue: () {
+            final lesson = _findFirstPlayableLesson();
+            if (lesson != null) {
+              context.push('/lesson_details', extra: lesson);
+            }
+          },
+        ),
+      ],
+    );
   }
 
   Widget _buildTabContent() {
@@ -149,7 +149,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
           border: Border.all(color: AppColors.border),
         ),
         child: Text(
-          AppLocalizationsAr.instance.courseDetailsNoContent,
+          AppLocalization.instance.courseDetailsNoContent,
           style: const TextStyle(
             fontSize: 15,
             color: AppColors.textSecondary,
@@ -195,7 +195,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            AppLocalizationsAr.instance.courseDetailsAbout,
+            AppLocalization.instance.courseDetailsAbout,
             style: const TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.bold,
@@ -206,7 +206,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
           Text(
             course.description.isNotEmpty
                 ? course.description
-                : AppLocalizationsAr.instance.courseDetailsDefaultDescription,
+                : AppLocalization.instance.courseDetailsDefaultDescription,
             style: const TextStyle(
               fontSize: 14,
               color: AppColors.textSecondary,
@@ -228,7 +228,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
           const Divider(color: AppColors.divider),
           const SizedBox(height: 16),
           Text(
-            AppLocalizationsAr.instance.courseDetailsWhatYouWillGet,
+            AppLocalization.instance.courseDetailsWhatYouWillGet,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -236,10 +236,22 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
             ),
           ),
           const SizedBox(height: 12),
-          _buildFeatureRow(Icons.videocam_outlined, AppLocalizationsAr.instance.courseDetailsFeatureVideos),
-          _buildFeatureRow(Icons.picture_as_pdf_outlined, AppLocalizationsAr.instance.courseDetailsFeaturePdfs),
-          _buildFeatureRow(Icons.quiz_outlined, AppLocalizationsAr.instance.courseDetailsFeatureQuizzes),
-          _buildFeatureRow(Icons.all_inclusive, AppLocalizationsAr.instance.courseDetailsFeatureAccess),
+          _buildFeatureRow(
+            Icons.videocam_outlined,
+            AppLocalization.instance.courseDetailsFeatureVideos,
+          ),
+          _buildFeatureRow(
+            Icons.picture_as_pdf_outlined,
+            AppLocalization.instance.courseDetailsFeaturePdfs,
+          ),
+          _buildFeatureRow(
+            Icons.quiz_outlined,
+            AppLocalization.instance.courseDetailsFeatureQuizzes,
+          ),
+          _buildFeatureRow(
+            Icons.all_inclusive,
+            AppLocalization.instance.courseDetailsFeatureAccess,
+          ),
         ],
       ),
     );
@@ -310,7 +322,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    AppLocalizationsAr.instance.courseDetailsReviewsBasedOn,
+                    AppLocalization.instance.courseDetailsReviewsBasedOn,
                     style: const TextStyle(
                       fontSize: 13,
                       color: AppColors.textSecondary,
@@ -323,8 +335,16 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
           const SizedBox(height: 20),
           const Divider(color: AppColors.divider),
           const SizedBox(height: 12),
-          _buildReviewItem(AppLocalizationsAr.instance.reviewName1, AppLocalizationsAr.instance.reviewComment1, AppLocalizationsAr.instance.reviewTime1),
-          _buildReviewItem(AppLocalizationsAr.instance.reviewName2, AppLocalizationsAr.instance.reviewComment2, AppLocalizationsAr.instance.reviewTime2),
+          _buildReviewItem(
+            AppLocalization.instance.reviewName1,
+            AppLocalization.instance.reviewComment1,
+            AppLocalization.instance.reviewTime1,
+          ),
+          _buildReviewItem(
+            AppLocalization.instance.reviewName2,
+            AppLocalization.instance.reviewComment2,
+            AppLocalization.instance.reviewTime2,
+          ),
         ],
       ),
     );
@@ -411,11 +431,7 @@ class _HeaderSection extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF237648),
-            Color(0xFF289A60),
-            Color(0xFF14B8A6),
-          ],
+          colors: [Color(0xFF237648), Color(0xFF289A60), Color(0xFF14B8A6)],
         ),
       ),
       child: Column(
@@ -464,10 +480,7 @@ class _HeaderSection extends StatelessWidget {
 // ─── Floating Stats Card (Hours & Lessons) ───────────────────────────────────
 
 class _FloatingStatsCard extends StatelessWidget {
-  const _FloatingStatsCard({
-    required this.hours,
-    required this.lessonsCount,
-  });
+  const _FloatingStatsCard({required this.hours, required this.lessonsCount});
 
   final String hours;
   final int lessonsCount;
@@ -502,7 +515,7 @@ class _FloatingStatsCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  '$hours ${AppLocalizationsAr.instance.courseCardHoursSuffix}',
+                  '$hours ${AppLocalization.instance.courseCardHoursSuffix}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -512,11 +525,7 @@ class _FloatingStatsCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: 1,
-            height: 36,
-            color: AppColors.divider,
-          ),
+          Container(width: 1, height: 36, color: AppColors.divider),
           // Lessons item (Left in RTL)
           Expanded(
             child: Row(
@@ -529,7 +538,7 @@ class _FloatingStatsCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  '$lessonsCount ${AppLocalizationsAr.instance.myCoursesLessonSuffix}',
+                  '$lessonsCount ${AppLocalization.instance.myCoursesLessonSuffix}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -556,9 +565,9 @@ class _TabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      AppLocalizationsAr.instance.courseDetailsTabCurriculum,
-      AppLocalizationsAr.instance.courseDetailsTabOverview,
-      AppLocalizationsAr.instance.courseDetailsTabReviews,
+      AppLocalization.instance.courseDetailsTabCurriculum,
+      AppLocalization.instance.courseDetailsTabOverview,
+      AppLocalization.instance.courseDetailsTabReviews,
     ];
 
     return Container(
@@ -584,7 +593,9 @@ class _TabBar extends StatelessWidget {
                     tabs[index],
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.w600,
                       color: isSelected
                           ? AppColors.primary
                           : const Color(0xFF64748B),
@@ -595,7 +606,9 @@ class _TabBar extends StatelessWidget {
                     height: 3,
                     width: 48,
                     decoration: BoxDecoration(
-                      color: isSelected ? AppColors.primary : Colors.transparent,
+                      color: isSelected
+                          ? AppColors.primary
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(3),
                     ),
                   ),
@@ -637,9 +650,9 @@ class _SectionItem extends StatelessWidget {
     }
     if (minutes >= 60) {
       final hours = (minutes / 60).toStringAsFixed(1).replaceAll('.0', '');
-      return '$hours ${AppLocalizationsAr.instance.courseCardHoursSuffix}';
+      return '$hours ${AppLocalization.instance.courseCardHoursSuffix}';
     }
-    return '$minutes ${AppLocalizationsAr.instance.courseMinutesSuffix}';
+    return '$minutes ${AppLocalization.instance.courseMinutesSuffix}';
   }
 
   @override
@@ -678,7 +691,7 @@ class _SectionItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          '${section.lessons.length} ${AppLocalizationsAr.instance.courseLessonsSuffix} • $durationStr',
+                          '${section.lessons.length} ${AppLocalization.instance.courseLessonsSuffix} • $durationStr',
                           style: const TextStyle(
                             fontSize: 13,
                             color: Color(0xFF64748B),
@@ -721,11 +734,13 @@ class _SectionItem extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: section.lessons.length,
-                separatorBuilder: (context, index) => const SizedBox(height: 10),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
                 itemBuilder: (context, index) {
                   final lesson = section.lessons[index];
                   // If second lesson and not locked, show active border style (like in screenshot)
-                  final isCurrentActive = !lesson.isCompleted && !lesson.isLocked;
+                  final isCurrentActive =
+                      !lesson.isCompleted && !lesson.isLocked;
 
                   return _LessonCard(
                     lesson: lesson,
@@ -757,16 +772,16 @@ class _LessonCard extends StatelessWidget {
 
   String _getSubtitle(LessonEntity lesson) {
     if (lesson is VideoLessonEntity) {
-      return '${lesson.durationMinutes} ${AppLocalizationsAr.instance.courseMinutesSuffix}';
+      return '${lesson.durationMinutes} ${AppLocalization.instance.courseMinutesSuffix}';
     } else if (lesson is QuizLessonEntity) {
       final count = lesson.questions.isNotEmpty ? lesson.questions.length : 10;
-      return '$count ${AppLocalizationsAr.instance.courseQuestionsSuffix}';
+      return '$count ${AppLocalization.instance.courseQuestionsSuffix}';
     } else if (lesson is ExamLessonEntity) {
-      return '${lesson.questionsCount} ${AppLocalizationsAr.instance.courseQuestionsSuffix}';
+      return '${lesson.questionsCount} ${AppLocalization.instance.courseQuestionsSuffix}';
     } else if (lesson is PdfLessonEntity) {
-      return '3 ${AppLocalizationsAr.instance.courseMegabyteSuffix}';
+      return '3 ${AppLocalization.instance.courseMegabyteSuffix}';
     } else {
-      return AppLocalizationsAr.instance.courseEducationalFile;
+      return AppLocalization.instance.courseEducationalFile;
     }
   }
 
@@ -778,20 +793,20 @@ class _LessonCard extends StatelessWidget {
     // Badge styling based on lesson type
     final (badgeBg, iconColor, iconData) = switch (lesson.type) {
       LessonType.video => (
-          const Color(0xFFE6FFFA),
-          const Color(0xFF14B8A6),
-          Icons.play_circle_outline_rounded,
-        ),
+        const Color(0xFFE6FFFA),
+        const Color(0xFF14B8A6),
+        Icons.play_circle_outline_rounded,
+      ),
       LessonType.pdf => (
-          const Color(0xFFF0F9FF),
-          const Color(0xFF38BDF8),
-          Icons.description_outlined,
-        ),
+        const Color(0xFFF0F9FF),
+        const Color(0xFF38BDF8),
+        Icons.description_outlined,
+      ),
       LessonType.quiz || LessonType.exam => (
-          isLocked ? const Color(0xFFF8FAFC) : const Color(0xFFF0FDF4),
-          isLocked ? const Color(0xFF94A3B8) : AppColors.primary,
-          isLocked ? Icons.lock_outline_rounded : Icons.quiz_outlined,
-        ),
+        isLocked ? const Color(0xFFF8FAFC) : const Color(0xFFF0FDF4),
+        isLocked ? const Color(0xFF94A3B8) : AppColors.primary,
+        isLocked ? Icons.lock_outline_rounded : Icons.quiz_outlined,
+      ),
     };
 
     return InkWell(
@@ -806,8 +821,8 @@ class _LessonCard extends StatelessWidget {
             color: isActive
                 ? AppColors.primary
                 : isLocked
-                    ? const Color(0xFFF1F5F9)
-                    : const Color(0xFFE2E8F0),
+                ? const Color(0xFFF1F5F9)
+                : const Color(0xFFE2E8F0),
             width: isActive ? 1.5 : 1.0,
           ),
         ),
@@ -858,13 +873,7 @@ class _LessonCard extends StatelessWidget {
                 color: badgeBg,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Center(
-                child: Icon(
-                  iconData,
-                  color: iconColor,
-                  size: 22,
-                ),
-              ),
+              child: Center(child: Icon(iconData, color: iconColor, size: 22)),
             ),
           ],
         ),
@@ -932,11 +941,7 @@ class _BottomBar extends StatelessWidget {
           height: 52,
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [
-                Color(0xFF256F46),
-                Color(0xFF2E8B57),
-                Color(0xFF14B8A6),
-              ],
+              colors: [Color(0xFF256F46), Color(0xFF2E8B57), Color(0xFF14B8A6)],
             ),
             borderRadius: BorderRadius.circular(14),
             boxShadow: [
@@ -954,7 +959,7 @@ class _BottomBar extends StatelessWidget {
               onTap: onContinue,
               child: Center(
                 child: Text(
-                  AppLocalizationsAr.instance.courseDetailsContinueLearning,
+                  AppLocalization.instance.courseDetailsContinueLearning,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

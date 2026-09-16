@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:learny/core/localization/l10n/app_localizations.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/router/app_router.dart';
 import 'package:learny/core/theme/app_theme.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
 import 'package:learny/core/extensions/snak_bar_message.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
 import 'package:learny/features/auth/presentation/view_model/email_verification_cubit/email_verification_cubit.dart';
 import 'package:learny/features/auth/presentation/widgets/app_back_button.dart';
@@ -28,7 +28,7 @@ class EmailVerificationPage extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            AppLocalizationsAr.instance.formEmailVerificationPageTitle,
+            AppLocalization.instance.formEmailVerificationPageTitle,
             textAlign: TextAlign.center,
             style: context.textStyle.headlineSmall?.copyWith(
               fontWeight: FontWeight.w800,

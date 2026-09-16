@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/courses/presentation/view_model/cubit/course_cubit.dart';
 import 'package:learny/features/courses/presentation/widgets/courses_body.dart';
 
@@ -34,9 +34,8 @@ class CoursesPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () =>
-                        CourseCubit.get(context).getCourses(),
-                    child: Text(AppLocalizationsAr.instance.coursesRetry),
+                    onPressed: () => CourseCubit.get(context).getCourses(),
+                    child: Text(AppLocalization.instance.coursesRetry),
                   ),
                 ],
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 class CoursesAppBar extends StatelessWidget {
   const CoursesAppBar({super.key});
@@ -13,7 +13,7 @@ class CoursesAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            AppLocalizationsAr.instance.coursesPageTitle,
+            AppLocalization.instance.coursesPageTitle,
             style: context.textStyle.headlineMedium?.copyWith(
               fontWeight: FontWeight.w800,
               color: context.colors.onSurface,
@@ -23,9 +23,14 @@ class CoursesAppBar extends StatelessWidget {
           TextField(
             textAlign: TextAlign.right,
             decoration: InputDecoration(
-              hintText: AppLocalizationsAr.instance.coursesSearchHint,
-              hintStyle: TextStyle(color: context.colors.onSurface.withValues(alpha: 0.4)),
-              prefixIcon: Icon(Icons.search, color: context.colors.onSurface.withValues(alpha: 0.5)),
+              hintText: AppLocalization.instance.coursesSearchHint,
+              hintStyle: TextStyle(
+                color: context.colors.onSurface.withValues(alpha: 0.4),
+              ),
+              prefixIcon: Icon(
+                Icons.search,
+                color: context.colors.onSurface.withValues(alpha: 0.5),
+              ),
               filled: true,
               fillColor: context.colors.surfaceContainerHighest,
               border: OutlineInputBorder(

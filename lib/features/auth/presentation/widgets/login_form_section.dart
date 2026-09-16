@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
 import 'package:learny/features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 import 'package:learny/features/auth/presentation/widgets/app_outlined_button.dart';
@@ -56,7 +56,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
             const SizedBox(height: 30),
 
             Text(
-              AppLocalizationsAr.instance.formLoginPage,
+              AppLocalization.instance.formLoginPage,
               style: context.textStyle.displayLarge?.copyWith(
                 fontWeight: FontWeight.w700,
                 fontSize: 23,
@@ -85,7 +85,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
             BlocBuilder<LoginCubit, LoginState>(
               builder: (context, state) {
                 return PrimaryAuthButton(
-                  text: AppLocalizationsAr.instance.formLoginPage,
+                  text: AppLocalization.instance.formLoginPage,
                   onTap: () async {
                     await login();
                   },
@@ -104,7 +104,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
               onPressed: () {
                 context.push('/login/register');
               },
-              text: AppLocalizationsAr.instance.formLoginPageCreateAccount,
+              text: AppLocalization.instance.formLoginPageCreateAccount,
             ),
             const SizedBox(height: 25),
           ],

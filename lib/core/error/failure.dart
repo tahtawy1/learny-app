@@ -1,5 +1,5 @@
 import 'package:learny/core/error/exceptions.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 abstract class Failure {
   final String message;
@@ -25,26 +25,24 @@ class AuthFailure implements Failure {
 
   const AuthFailure._({required this.message});
 
-  factory AuthFailure.invalidCredentials() => AuthFailure._(
-    message: AppLocalizationsAr.instance.exAuthInvalidCredentials,
-  );
+  factory AuthFailure.invalidCredentials() =>
+      AuthFailure._(message: AppLocalization.instance.exAuthInvalidCredentials);
 
-  factory AuthFailure.emailAlreadyInUse() => AuthFailure._(
-    message: AppLocalizationsAr.instance.exAuthEmailAlreadyInUse,
-  );
+  factory AuthFailure.emailAlreadyInUse() =>
+      AuthFailure._(message: AppLocalization.instance.exAuthEmailAlreadyInUse);
 
   factory AuthFailure.weakPassword() =>
-      AuthFailure._(message: AppLocalizationsAr.instance.exAuthWeakPassword);
+      AuthFailure._(message: AppLocalization.instance.exAuthWeakPassword);
 
   factory AuthFailure.networkError() =>
-      AuthFailure._(message: AppLocalizationsAr.instance.exAuthNetworkError);
+      AuthFailure._(message: AppLocalization.instance.exAuthNetworkError);
 
   factory AuthFailure.tooManyRequests() =>
-      AuthFailure._(message: AppLocalizationsAr.instance.exAuthTooManyRequests);
+      AuthFailure._(message: AppLocalization.instance.exAuthTooManyRequests);
 
   factory AuthFailure.unknown([String? details]) => AuthFailure._(
     message:
-        '${AppLocalizationsAr.instance.exAuthUnknownPrefix}${details != null ? ' $details' : ''}',
+        '${AppLocalization.instance.exAuthUnknownPrefix}${details != null ? ' $details' : ''}',
   );
 
   @override
@@ -82,17 +80,17 @@ class CourseFailure extends Failure {
   const CourseFailure({required super.message});
 
   factory CourseFailure.networkError() =>
-      CourseFailure(message: AppLocalizationsAr.instance.courseFailureNetwork);
+      CourseFailure(message: AppLocalization.instance.courseFailureNetwork);
 
   factory CourseFailure.timeout() =>
-      CourseFailure(message: AppLocalizationsAr.instance.courseFailureTimeout);
+      CourseFailure(message: AppLocalization.instance.courseFailureTimeout);
 
   factory CourseFailure.resourceExhausted() => CourseFailure(
-    message: AppLocalizationsAr.instance.courseFailureResourceExhausted,
+    message: AppLocalization.instance.courseFailureResourceExhausted,
   );
 
   factory CourseFailure.unknown() =>
-      CourseFailure(message: AppLocalizationsAr.instance.courseFailureUnknown);
+      CourseFailure(message: AppLocalization.instance.courseFailureUnknown);
 }
 
 class CourseExceptionMapper {
@@ -118,11 +116,12 @@ class EnrollmentFailure extends Failure {
   const EnrollmentFailure({required super.message});
 
   factory EnrollmentFailure.networkError() =>
-      EnrollmentFailure(message: AppLocalizationsAr.instance.networkError);
+      EnrollmentFailure(message: AppLocalization.instance.networkError);
 
-  factory EnrollmentFailure.unauthorized() =>
-      EnrollmentFailure(message: AppLocalizationsAr.instance.enrollmentUnauthorized);
+  factory EnrollmentFailure.unauthorized() => EnrollmentFailure(
+    message: AppLocalization.instance.enrollmentUnauthorized,
+  );
 
   factory EnrollmentFailure.unknown() =>
-      EnrollmentFailure(message: AppLocalizationsAr.instance.unexpectedError);
+      EnrollmentFailure(message: AppLocalization.instance.unexpectedError);
 }

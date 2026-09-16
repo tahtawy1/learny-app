@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
 
 class CourseCard extends StatelessWidget {
@@ -73,14 +73,14 @@ class CourseCard extends StatelessWidget {
                     _InfoChip(
                       icon: Icons.people_outline,
                       label:
-                          '${course.studentsCount} ${AppLocalizationsAr.instance.courseCardStudentsSuffix}',
+                          '${course.studentsCount} ${AppLocalization.instance.courseCardStudentsSuffix}',
                       color: context.colors.primary,
                     ),
                     const SizedBox(width: 12),
                     _InfoChip(
                       icon: Icons.access_time,
                       label:
-                          '${course.durationMinutes} ${AppLocalizationsAr.instance.courseCardHoursSuffix}',
+                          '${course.durationMinutes} ${AppLocalization.instance.courseCardHoursSuffix}',
                       color: context.colors.primary,
                     ),
                   ],
@@ -94,7 +94,7 @@ class CourseCard extends StatelessWidget {
                   children: [
                     if (course.oldPrice != null) ...[
                       Text(
-                        '${course.oldPrice!.toStringAsFixed(0)} ${AppLocalizationsAr.instance.courseCardCurrencySuffix}',
+                        '${course.oldPrice!.toStringAsFixed(0)} ${AppLocalization.instance.courseCardCurrencySuffix}',
                         style: context.textStyle.bodySmall?.copyWith(
                           color: context.colors.onSurface.withValues(
                             alpha: 0.4,
@@ -106,8 +106,8 @@ class CourseCard extends StatelessWidget {
                     ],
                     Text(
                       course.isFree
-                          ? AppLocalizationsAr.instance.courseCardFree
-                          : '${course.price.toStringAsFixed(0)} ${AppLocalizationsAr.instance.courseCardCurrencySuffix}',
+                          ? AppLocalization.instance.courseCardFree
+                          : '${course.price.toStringAsFixed(0)} ${AppLocalization.instance.courseCardCurrencySuffix}',
                       style: context.textStyle.titleMedium?.copyWith(
                         color: context.colors.primary,
                         fontWeight: FontWeight.w800,
@@ -132,7 +132,7 @@ class CourseCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                         child: Text(
-                          AppLocalizationsAr.instance.courseCardViewContent,
+                          AppLocalization.instance.courseCardViewContent,
                           style: TextStyle(color: context.colors.primary),
                         ),
                       ),
@@ -151,8 +151,8 @@ class CourseCard extends StatelessWidget {
                         ),
                         child: Text(
                           course.isFree
-                              ? AppLocalizationsAr.instance.courseCardFreeEnroll
-                              : AppLocalizationsAr.instance.courseCardBuy,
+                              ? AppLocalization.instance.courseCardFreeEnroll
+                              : AppLocalization.instance.courseCardBuy,
                         ),
                       ),
                     ),

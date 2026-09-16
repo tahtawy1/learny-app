@@ -1,16 +1,16 @@
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 class AppValidators {
   // ================= Email =================
   static String? email(String? val) {
     if (val == null || val.trim().isEmpty) {
-      return AppLocalizationsAr.instance.validationEnterEmail;
+      return AppLocalization.instance.validationEnterEmail;
     }
 
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
     if (!emailRegex.hasMatch(val)) {
-      return AppLocalizationsAr.instance.validationEmailInvalid;
+      return AppLocalization.instance.validationEmailInvalid;
     }
 
     return null;
@@ -19,11 +19,11 @@ class AppValidators {
   // ================= Password =================
   static String? password(String? val) {
     if (val == null || val.isEmpty) {
-      return AppLocalizationsAr.instance.validationEnterPassword;
+      return AppLocalization.instance.validationEnterPassword;
     }
 
     if (val.length < 6) {
-      return AppLocalizationsAr.instance.validationPasswordMinLength;
+      return AppLocalization.instance.validationPasswordMinLength;
     }
 
     return null;
@@ -32,11 +32,11 @@ class AppValidators {
   // ================= Confirm Password =================
   static String? confirmPassword(String? val, String password) {
     if (val == null || val.isEmpty) {
-      return AppLocalizationsAr.instance.validationEnterPasswordConfirm;
+      return AppLocalization.instance.validationEnterPasswordConfirm;
     }
 
     if (val != password) {
-      return AppLocalizationsAr.instance.validationPasswordMismatch;
+      return AppLocalization.instance.validationPasswordMismatch;
     }
 
     return null;
@@ -45,11 +45,11 @@ class AppValidators {
   // ================= Name =================
   static String? name(String? val) {
     if (val == null || val.trim().isEmpty) {
-      return AppLocalizationsAr.instance.validationEnterName;
+      return AppLocalization.instance.validationEnterName;
     }
 
     if (val.length < 3) {
-      return AppLocalizationsAr.instance.validationNameTooShort;
+      return AppLocalization.instance.validationNameTooShort;
     }
 
     return null;
@@ -58,7 +58,7 @@ class AppValidators {
   // ─── Required Field ───
   static String? requiredField(String? value, String fieldName) {
     if (value == null || value.trim().isEmpty) {
-      return "${AppLocalizationsAr.instance.validationEnterFieldPrefix}$fieldName";
+      return "${AppLocalization.instance.validationEnterFieldPrefix}$fieldName";
     }
     return null;
   }
@@ -66,10 +66,10 @@ class AppValidators {
   // ─── Number Validator ───
   static String? number(String? value, String fieldName) {
     if (value == null || value.trim().isEmpty) {
-      return "${AppLocalizationsAr.instance.validationEnterFieldPrefix}$fieldName";
+      return "${AppLocalization.instance.validationEnterFieldPrefix}$fieldName";
     }
     if (double.tryParse(value) == null) {
-      return "$fieldName${AppLocalizationsAr.instance.validationFieldMustBeIntSuffix}";
+      return "$fieldName${AppLocalization.instance.validationFieldMustBeIntSuffix}";
     }
     return null;
   }
@@ -77,14 +77,14 @@ class AppValidators {
   // ─── Price Validator ───
   static String? price(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return AppLocalizationsAr.instance.validationEnterPrice;
+      return AppLocalization.instance.validationEnterPrice;
     }
     final number = double.tryParse(value);
     if (number == null) {
-      return AppLocalizationsAr.instance.validationPriceMustBeNumber;
+      return AppLocalization.instance.validationPriceMustBeNumber;
     }
     if (number <= 0) {
-      return AppLocalizationsAr.instance.validationPriceMustBeGreaterThanZero;
+      return AppLocalization.instance.validationPriceMustBeGreaterThanZero;
     }
     return null;
   }
@@ -92,7 +92,7 @@ class AppValidators {
   // ================= Phone =================
   static String? phone(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return AppLocalizationsAr.instance.validationEnterPhone;
+      return AppLocalization.instance.validationEnterPhone;
     }
 
     final phone = value.trim();
@@ -100,7 +100,7 @@ class AppValidators {
     final phoneRegex = RegExp(r'^01[0125][0-9]{8}$');
 
     if (!phoneRegex.hasMatch(phone)) {
-      return AppLocalizationsAr.instance.validationPhoneInvalid;
+      return AppLocalization.instance.validationPhoneInvalid;
     }
 
     return null;

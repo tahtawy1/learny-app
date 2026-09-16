@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 class ForgotPasswordWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -15,7 +15,7 @@ class ForgotPasswordWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Text(
-          AppLocalizationsAr.instance.formLoginPageForgotPassword,
+          AppLocalization.instance.formLoginPageForgotPassword,
           style: context.textStyle.bodyMedium?.copyWith(
             color: color ?? context.colors.primary,
             fontWeight: FontWeight.w600,

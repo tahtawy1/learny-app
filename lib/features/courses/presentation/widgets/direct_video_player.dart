@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:video_player/video_player.dart';
 
 class DirectVideoPlayer extends StatefulWidget {
@@ -238,7 +238,7 @@ class _DirectVideoPlayerState extends State<DirectVideoPlayer> {
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizationsAr.instance.videoPlayerError,
+              AppLocalization.instance.videoPlayerError,
               style: const TextStyle(color: Colors.white70, fontSize: 14),
             ),
           ],
@@ -447,12 +447,8 @@ class _DirectVideoPlayerState extends State<DirectVideoPlayer> {
                               onTap: _toggleMute,
                               child: Tooltip(
                                 message: _isMuted || _volume == 0
-                                    ? AppLocalizationsAr
-                                          .instance
-                                          .videoPlayerUnmute
-                                    : AppLocalizationsAr
-                                          .instance
-                                          .videoPlayerMute,
+                                    ? AppLocalization.instance.videoPlayerUnmute
+                                    : AppLocalization.instance.videoPlayerMute,
                                 child: Icon(
                                   _isMuted || _volume == 0
                                       ? Icons.volume_off_rounded
@@ -499,7 +495,7 @@ class _DirectVideoPlayerState extends State<DirectVideoPlayer> {
                             // قائمة اختيار السرعة
                             PopupMenuButton<double>(
                               initialValue: _currentSpeed,
-                              tooltip: AppLocalizationsAr
+                              tooltip: AppLocalization
                                   .instance
                                   .videoPlayerPlaybackSpeed,
                               color: const Color(0xFF1E293B),

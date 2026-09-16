@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/core/theme/app_radius.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
 import 'package:learny/features/profile/presentation/widgets/user_avatar.dart';
 
 class ProfileHeaderCard extends StatelessWidget {
-  const ProfileHeaderCard({
-    super.key,
-    required this.user,
-    this.onEditTap,
-  });
+  const ProfileHeaderCard({super.key, required this.user, this.onEditTap});
 
   final UserEntity user;
   final VoidCallback? onEditTap;
@@ -21,9 +17,7 @@ class ProfileHeaderCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(top: 20, bottom: 28),
-      decoration: const BoxDecoration(
-        gradient: AppColors.primaryGradient,
-      ),
+      decoration: const BoxDecoration(gradient: AppColors.primaryGradient),
       child: SafeArea(
         bottom: false,
         child: Column(
@@ -36,7 +30,7 @@ class ProfileHeaderCard extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             Text(
-              user.name ?? AppLocalizationsAr.instance.profileDefaultName,
+              user.name ?? AppLocalization.instance.profileDefaultName,
               style: context.textStyle.headlineSmall?.copyWith(
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
@@ -50,7 +44,7 @@ class ProfileHeaderCard extends StatelessWidget {
                 borderRadius: AppRadius.full,
               ),
               child: Text(
-                AppLocalizationsAr.instance.profileDefaultGrade,
+                AppLocalization.instance.profileDefaultGrade,
                 style: context.textStyle.bodySmall?.copyWith(
                   color: AppColors.white.withValues(alpha: 0.95),
                   fontWeight: FontWeight.w600,

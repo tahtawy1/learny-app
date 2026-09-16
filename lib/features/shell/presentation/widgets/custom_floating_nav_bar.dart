@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 
 class NavItemData {
@@ -23,7 +23,7 @@ class CustomFloatingNavBar extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final items = [
       NavItemData(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/auth/presentation/widgets/primary_auth_button.dart';
 
 class RegisterBottomSection extends StatefulWidget {
@@ -60,13 +60,12 @@ class _RegisterBottomSectionState extends State<RegisterBottomSection> {
                   ),
                   children: [
                     TextSpan(
-                      text: AppLocalizationsAr
-                          .instance
-                          .formRegisterPageTermsPrefix,
+                      text:
+                          AppLocalization.instance.formRegisterPageTermsPrefix,
                     ),
 
                     TextSpan(
-                      text: AppLocalizationsAr
+                      text: AppLocalization
                           .instance
                           .formRegisterPageTermsAndPrivacy,
                       style: TextStyle(
@@ -88,7 +87,7 @@ class _RegisterBottomSectionState extends State<RegisterBottomSection> {
           width: double.infinity,
           height: 58,
           child: PrimaryAuthButton(
-            text: AppLocalizationsAr.instance.formRegisterPageTitle,
+            text: AppLocalization.instance.formRegisterPageTitle,
             onTap: widget.onCreateAccount ?? () => {},
             isLoading: widget.isLoadingOnCreateAccount,
           ),
@@ -104,12 +103,12 @@ class _RegisterBottomSectionState extends State<RegisterBottomSection> {
               style: context.textStyle.bodyMedium?.copyWith(color: textColor),
               children: [
                 TextSpan(
-                  text: AppLocalizationsAr
+                  text: AppLocalization
                       .instance
                       .formRegisterPageAlreadyHaveAccount,
                 ),
                 TextSpan(
-                  text: AppLocalizationsAr.instance.formLoginPage,
+                  text: AppLocalization.instance.formLoginPage,
                   style: TextStyle(
                     color: primaryColor,
                     fontWeight: FontWeight.w700,

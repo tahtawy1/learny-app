@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/auth/domain/usecases/send_password_reset_email_usecase.dart';
 import 'package:meta/meta.dart';
 
@@ -25,9 +25,7 @@ class ForgetCubit extends Cubit<ForgetState> {
       },
       (_) {
         emit(
-          ForgetSuccess(
-            AppLocalizationsAr.instance.formForgetPageSuccessMessage,
-          ),
+          ForgetSuccess(AppLocalization.instance.formForgetPageSuccessMessage),
         );
       },
     );

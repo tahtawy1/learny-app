@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 class LessonAttachments extends StatelessWidget {
   final String? title;
   final String? size;
   final VoidCallback? onDownload;
 
-  const LessonAttachments({
-    super.key,
-    this.title,
-    this.size,
-    this.onDownload,
-  });
+  const LessonAttachments({super.key, this.title, this.size, this.onDownload});
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTitle = title ?? AppLocalizationsAr.instance.lessonDefaultAttachmentName;
-    final effectiveSize = size ?? '2.5 ${AppLocalizationsAr.instance.courseMegabyteSuffix}';
+    final effectiveTitle =
+        title ?? AppLocalization.instance.lessonDefaultAttachmentName;
+    final effectiveSize =
+        size ?? '2.5 ${AppLocalization.instance.courseMegabyteSuffix}';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizationsAr.instance.lessonAttachmentsTitle,
+          AppLocalization.instance.lessonAttachmentsTitle,
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

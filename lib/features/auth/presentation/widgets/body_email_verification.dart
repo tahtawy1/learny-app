@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
 import 'package:learny/features/auth/presentation/widgets/email_display_field.dart';
 import 'package:learny/features/auth/presentation/widgets/email_verification_icon.dart';
@@ -27,7 +27,7 @@ class BodyEmailVerification extends StatelessWidget {
 
             // ================= Main Title =================
             Text(
-              AppLocalizationsAr.instance.formEmailVerificationPageHeading,
+              AppLocalization.instance.formEmailVerificationPageHeading,
               textAlign: TextAlign.center,
               style: context.textStyle.headlineSmall?.copyWith(
                 fontWeight: FontWeight.w800,
@@ -39,7 +39,7 @@ class BodyEmailVerification extends StatelessWidget {
             const SizedBox(height: 10),
 
             Text(
-              AppLocalizationsAr.instance.formEmailVerificationPageSentTo,
+              AppLocalization.instance.formEmailVerificationPageSentTo,
               textAlign: TextAlign.center,
               style: context.textStyle.bodyMedium?.copyWith(
                 color: context.colors.onSurfaceVariant,
@@ -53,7 +53,7 @@ class BodyEmailVerification extends StatelessWidget {
 
             // ================= Description =================
             Text(
-              AppLocalizationsAr.instance.formEmailVerificationPageDescription,
+              AppLocalization.instance.formEmailVerificationPageDescription,
               textAlign: TextAlign.center,
               style: context.textStyle.bodySmall?.copyWith(
                 height: 1.7,
@@ -65,8 +65,7 @@ class BodyEmailVerification extends StatelessWidget {
 
             // ================= Verify Button =================
             PrimaryAuthButton(
-              text:
-                  AppLocalizationsAr.instance.formEmailVerificationPageSuccess,
+              text: AppLocalization.instance.formEmailVerificationPageSuccess,
               onTap: () {},
             ),
 
@@ -78,7 +77,7 @@ class BodyEmailVerification extends StatelessWidget {
                 // إعادة إرسال رابط التفعيل
               },
               child: Text(
-                AppLocalizationsAr.instance.formEmailVerificationPageResend,
+                AppLocalization.instance.formEmailVerificationPageResend,
                 style: context.textStyle.bodyMedium?.copyWith(
                   color: context.colors.primary,
                   fontWeight: FontWeight.w700,

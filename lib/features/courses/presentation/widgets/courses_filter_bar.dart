@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 class CoursesFilterBar extends StatefulWidget {
   const CoursesFilterBar({super.key});
@@ -13,9 +13,9 @@ class _CoursesFilterBarState extends State<CoursesFilterBar> {
   int _selectedIndex = 0;
 
   List<String> get _filters => [
-    AppLocalizationsAr.instance.coursesFilterAll,
-    AppLocalizationsAr.instance.coursesFilterSecondGrade,
-    AppLocalizationsAr.instance.coursesFilterThirdGrade,
+    AppLocalization.instance.coursesFilterAll,
+    AppLocalization.instance.coursesFilterSecondGrade,
+    AppLocalization.instance.coursesFilterThirdGrade,
   ];
 
   @override

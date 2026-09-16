@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
 import 'package:learny/features/enrollment/domain/entities/enrollment_entity.dart';
@@ -24,7 +24,7 @@ class MyCoursesBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
 
     return SafeArea(
       child: Column(
@@ -86,7 +86,7 @@ class _FilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     final items = [
       (EnrollmentFilter.all, loc.myCoursesFilterAll),
       (EnrollmentFilter.inProgress, loc.myCoursesFilterInProgress),
@@ -142,7 +142,7 @@ class _EmptyFiltered extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     final message = filter == EnrollmentFilter.completed
         ? loc.myCoursesEmptyCompleted
         : filter == EnrollmentFilter.inProgress
@@ -179,7 +179,7 @@ class MyCoursesEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),

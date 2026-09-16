@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/core/theme/app_radius.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
@@ -36,7 +36,7 @@ class _ProfileView extends StatelessWidget {
         } else if (state is ProfileUpdateSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizationsAr.instance.profileUpdateSuccess),
+              content: Text(AppLocalization.instance.profileUpdateSuccess),
               backgroundColor: AppColors.success,
             ),
           );
@@ -137,7 +137,7 @@ class _ProfileView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    AppLocalizationsAr.instance.profilePersonalInfo,
+                    AppLocalization.instance.profilePersonalInfo,
                     style: context.textStyle.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: context.colors.onSurface,
@@ -168,21 +168,21 @@ class _ProfileView extends StatelessWidget {
           const SizedBox(height: 14),
           _buildInfoRow(
             context,
-            label: AppLocalizationsAr.instance.profileName,
+            label: AppLocalization.instance.profileName,
             value: user.name ?? '',
             icon: Icons.person_outline,
           ),
           const SizedBox(height: 12),
           _buildInfoRow(
             context,
-            label: AppLocalizationsAr.instance.profileEmail,
+            label: AppLocalization.instance.profileEmail,
             value: user.email,
             icon: Icons.email_outlined,
           ),
           const SizedBox(height: 12),
           _buildInfoRow(
             context,
-            label: AppLocalizationsAr.instance.profilePhone,
+            label: AppLocalization.instance.profilePhone,
             value: user.phone ?? '',
             icon: Icons.phone_iphone_outlined,
           ),
@@ -263,7 +263,7 @@ class _ProfileView extends StatelessWidget {
               const SizedBox(width: 8),
 
               Text(
-                AppLocalizationsAr.instance.profileAboutPlatform,
+                AppLocalization.instance.profileAboutPlatform,
                 style: context.textStyle.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: context.colors.onSurface,
@@ -273,7 +273,7 @@ class _ProfileView extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            AppLocalizationsAr.instance.profileAboutDescription,
+            AppLocalization.instance.profileAboutDescription,
             textAlign: TextAlign.center,
             style: context.textStyle.bodySmall?.copyWith(
               color: AppColors.textSecondary,
@@ -298,7 +298,7 @@ class _ProfileView extends StatelessWidget {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  AppLocalizationsAr.instance.profileMission,
+                  AppLocalization.instance.profileMission,
                   style: context.textStyle.bodySmall?.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.w600,
@@ -319,7 +319,7 @@ class _ProfileView extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: AppRadius.sm),
               ),
               child: Text(
-                AppLocalizationsAr.instance.profileLearnMore,
+                AppLocalization.instance.profileLearnMore,
                 style: context.textStyle.labelLarge?.copyWith(
                   color: AppColors.teal,
                   fontWeight: FontWeight.bold,
@@ -363,7 +363,7 @@ class _ProfileView extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      AppLocalizationsAr.instance.profileLogout,
+                      AppLocalization.instance.profileLogout,
                       style: context.textStyle.bodyLarge?.copyWith(
                         color: AppColors.error,
                         fontWeight: FontWeight.bold,
