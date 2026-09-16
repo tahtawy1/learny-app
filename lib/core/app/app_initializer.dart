@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:learny/core/di/service_locator.dart';
 import 'package:learny/firebase_options.dart';
 
 class AppInitializer {
@@ -8,5 +9,7 @@ class AppInitializer {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    await setupLocators();
+
   }
 }

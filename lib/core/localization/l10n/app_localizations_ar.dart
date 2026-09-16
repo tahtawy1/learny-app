@@ -106,4 +106,88 @@ class AppLocalizationsAr extends AppLocalizations {
   String get formEmailVerificationPageResend => "إعادة إرسال الرابط";
   String get formForgetPageSuccessMessage =>
       "تم إرسال رابط استعادة كلمة المرور إلى بريدك الإلكتروني بنجاح.";
+
+  // ==================== Courses ====================
+
+  String get coursesPageTitle => 'استكشف الكورسات';
+  String get coursesSearchHint => 'ابحث عن كورس...';
+  String get coursesEmptyState => 'لا توجد كورسات متاحة';
+  String get coursesRetry => 'إعادة المحاولة';
+
+  // Filter bar
+  String get coursesFilterAll => 'الكل';
+  String get coursesFilterSecondGrade => 'الصف الثاني';
+  String get coursesFilterThirdGrade => 'الصف الثالث';
+
+  // Course card
+  String get courseCardStudentsSuffix => 'طالب';
+  String get courseCardHoursSuffix => 'ساعة';
+  String get courseCardCurrencySuffix => 'ج.م';
+  String get courseCardFree => 'مجاني';
+  String get courseCardViewContent => 'عرض المحتوى';
+  String get courseCardFreeEnroll => 'تسجيل مجاني';
+  String get courseCardBuy => 'شراء الكورس';
+
+  // Course failure messages
+  String get courseFailureNetwork => 'تأكد من اتصالك بالإنترنت';
+  String get courseFailureTimeout => 'انتهت مهلة الاتصال بالخادم';
+  String get courseFailureResourceExhausted => 'تم تجاوز الحد المسموح للطلبات';
+  String get courseFailureUnknown => 'حدث خطأ غير متوقع';
+
+  // ==================== My Courses ====================
+  String get myCoursesPageTitle => 'كورساتي';
+  String get myCoursesFilterAll => 'الكل';
+  String get myCoursesFilterInProgress => 'قيد التقدم';
+  String get myCoursesFilterCompleted => 'مكتملة';
+  String get myCoursesStatusInProgress => 'قيد التقدم';
+  String get myCoursesStatusCompleted => 'مكتملة';
+  String get myCoursesEmptyTitle => 'ابدأ رحلتك التعليمية';
+  String get myCoursesEmptySubtitle => 'لم تسجّل في أي كورس بعد';
+  String get myCoursesEmptyCompleted => 'لم تُكمل أي كورس بعد';
+  String get myCoursesEmptyInProgress => 'لا توجد كورسات قيد التقدم';
+  String get myCoursesEmptyExploreButton => 'استكشاف الكورسات';
+  String get myCoursesContinueButton => 'متابعة';
+  String get myCoursesViewCertificate => 'عرض الشهادة';
+  String get myCoursesLessonSuffix => 'درس';
+
+  // ==================== Course Details & Lessons ====================
+  String get courseDetailsTabCurriculum => 'المحتوى';
+  String get courseDetailsTabOverview => 'التفاصيل';
+  String get courseDetailsTabReviews => 'التقييمات';
+  String get courseDetailsNoContent => 'لا يوجد محتوى متاح حالياً';
+  String get courseDetailsAbout => 'عن الكورس';
+  String get courseDetailsDefaultDescription =>
+      'شرح تفصيلي وشامل لمقرر الأحياء مع التركيز على الفهم والتطبيق العملي وحل الأسئلة والامتحانات التدريبية للتفوق في الثانوية العامة.';
+  String get courseDetailsWhatYouWillGet => 'ماذا ستحصل في هذا الكورس؟';
+  String get courseDetailsFeatureVideos => 'فيديوهات شرح بجودة عالية';
+  String get courseDetailsFeaturePdfs => 'مذكرات وملخصات بصيغة PDF';
+  String get courseDetailsFeatureQuizzes => 'اختبارات تقييمية بعد كل درس';
+  String get courseDetailsFeatureAccess =>
+      'وصول غير محدود للمحتوى في أي وقت';
+  String get courseDetailsReviewsBasedOn => 'بناءً على 128 تقييم';
+  String get courseDetailsContinueLearning => 'متابعة التعلم';
+  String get courseMinutesSuffix => 'دقيقة';
+  String get courseLessonsSuffix => 'دروس';
+  String get courseQuestionsSuffix => 'أسئلة';
+  String get courseEducationalFile => 'ملف تعليمي';
+  String get courseMegabyteSuffix => 'ميجابايت';
+
+  // Lesson Pages & Navigation
+  String get lessonTypeNotSupported => 'نوع الدرس غير مدعوم';
+  String get pdfLessonPrefix => 'درس PDF';
+  String get quizLessonPrefix => 'اختبار';
+  String get lessonAttachmentsTitle => 'المرفقات';
+  String get lessonDefaultAttachmentName => 'ملخص الدرس.pdf';
+  String get lessonNavigationPrevious => 'الدرس السابق';
+  String get lessonNavigationNext => 'الدرس التالي';
+  String get videoLessonDefaultDescription =>
+      'في هذا الدرس، سنقوم بشرح وتفصيل المحتوى التعليمي مع توضيح أهم النقاط الأساسية والتطبيقية لمساعدتك على التفوق.';
+  String get videoLessonCompleted => 'تم الإكمال بنجاح';
+  String get videoLessonMarkAsCompleted => 'تمييز كمكتمل';
+
+  // Video Player
+  String get videoPlayerError => 'تعذر تشغيل الفيديو';
+  String get videoPlayerUnmute => 'إلغاء كتم الصوت';
+  String get videoPlayerMute => 'كتم الصوت';
+  String get videoPlayerPlaybackSpeed => 'سرعة التشغيل';
 }

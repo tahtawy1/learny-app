@@ -77,3 +77,52 @@ class AuthExceptionMapper {
     }
   }
 }
+
+class CourseFailure extends Failure {
+  const CourseFailure({required super.message});
+
+  factory CourseFailure.networkError() =>
+      CourseFailure(message: AppLocalizationsAr.instance.courseFailureNetwork);
+
+  factory CourseFailure.timeout() =>
+      CourseFailure(message: AppLocalizationsAr.instance.courseFailureTimeout);
+
+  factory CourseFailure.resourceExhausted() => CourseFailure(
+    message: AppLocalizationsAr.instance.courseFailureResourceExhausted,
+  );
+
+  factory CourseFailure.unknown() =>
+      CourseFailure(message: AppLocalizationsAr.instance.courseFailureUnknown);
+}
+
+class CourseExceptionMapper {
+  static CourseFailure map(CourseException exception) {
+    switch (exception.code) {
+      case 'unavailable':
+      case 'network-request-failed':
+      case 'No_Internet_connection':
+        return CourseFailure.networkError();
+
+      case 'deadline-exceeded':
+      case 'The_connection_has_timed_out':
+        return CourseFailure.timeout();
+      case 'resource-exhausted':
+        return CourseFailure.resourceExhausted();
+      default:
+        return CourseFailure.unknown();
+    }
+  }
+}
+
+class EnrollmentFailure extends Failure {
+  const EnrollmentFailure({required super.message});
+
+  factory EnrollmentFailure.networkError() =>
+      EnrollmentFailure(message: AppLocalizationsAr.instance.networkError);
+
+  factory EnrollmentFailure.unauthorized() =>
+      const EnrollmentFailure(message: 'يرجى تسجيل الدخول لعرض دوراتك');
+
+  factory EnrollmentFailure.unknown() =>
+      EnrollmentFailure(message: AppLocalizationsAr.instance.unexpectedError);
+}

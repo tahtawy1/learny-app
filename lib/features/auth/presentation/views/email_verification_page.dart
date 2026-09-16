@@ -21,7 +21,7 @@ class EmailVerificationPage extends StatelessWidget {
         if (state is EmailVerificationFailure) {
           context.snackBar(state.message, false);
         } else if (state is EmailVerificationSuccess) {
-          context.go('/profile');
+          context.go('/courses');
         }
       },
       child: Scaffold(

@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:learny/core/const/user_role.dart';
 import 'package:learny/core/error/exceptions.dart';
 import 'package:learny/features/auth/data/models/user_model.dart';
+import 'package:learny/features/courses/data/models/course_model.dart';
+import 'package:learny/features/enrollment/data/models/enrollment_model.dart';
 
 class FirebaseService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -64,10 +66,9 @@ class FirebaseService {
       }
 
       await user.updateDisplayName(name);
-      await _firebaseFirestore
-          .collection('users')
-          .doc(user.uid)
-          .update({'name': name});
+      await _firebaseFirestore.collection('users').doc(user.uid).update({
+        'name': name,
+      });
 
       return await getDataUserWithId(user.uid);
     } on FirebaseException catch (e) {
@@ -198,7 +199,6 @@ class FirebaseService {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      print(e);
       throw AuthException(code: e.toString());
     }
   }
@@ -208,6 +208,60 @@ class FirebaseService {
       await _auth.signOut();
     } catch (e) {
       throw AuthException(code: e.toString());
+    }
+  }
+
+  static Future<List<CourseModel>> getCourses() async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('courses')
+          .get();
+      return snapshot.docs.map((doc) {
+        return CourseModel.fromJson({...doc.data()});
+      }).toList();
+    } on FirebaseException catch (e) {
+      throw CourseException(code: e.code);
+    } on SocketException {
+      throw const CourseException(code: 'No_Internet_connection');
+    } on TimeoutException {
+      throw const CourseException(code: 'The_connection_has_timed_out');
+    } on FormatException catch (e) {
+      throw CourseException(code: e.message);
+    } catch (e) {
+      throw CourseException(code: e.toString());
+    }
+  }
+
+  static Future<List<EnrollmentModel>> getMyEnrollments() async {
+    try {
+      final userId = getCurrentUserId() ?? 'seed_test_user_001';
+
+      final snapshot = await _firebaseFirestore
+          .collection('enrollments')
+          .where('userId', isEqualTo: userId)
+          .get();
+
+      return snapshot.docs
+          .map(
+            (doc) => EnrollmentModel.fromJson({
+              ...doc.data(),
+              'id': doc.id,
+            }),
+          )
+          .toList();
+    } on FirebaseException catch (e) {
+      throw EnrollmentException(code: e.code);
+    } on SocketException {
+      throw const EnrollmentException(code: 'No_Internet_connection');
+    } on TimeoutException {
+      throw const EnrollmentException(
+        code: 'The_connection_has_timed_out',
+      );
+    } on FormatException catch (e) {
+      throw EnrollmentException(code: e.message);
+    } catch (e) {
+      if (e is AppException) rethrow;
+      throw EnrollmentException(code: e.toString());
     }
   }
 }
