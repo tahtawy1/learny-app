@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
+import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/core/theme/app_radius.dart';
 import 'package:learny/features/profile/presentation/view_model/profile_cubit.dart';
@@ -123,7 +124,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                           // Modal Title
                           Text(
-                            'تعديل الاسم',
+                            AppLocalizationsAr.instance.editNameTitle,
                             style: context.textStyle.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: context.colors.onSurface,
@@ -133,7 +134,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                           // Current Name Subtitle
                           Text(
-                            'الاسم الحالي: $currentName',
+                            '${AppLocalizationsAr.instance.editCurrentNamePrefix}$currentName',
                             style: context.textStyle.bodySmall?.copyWith(
                               color: AppColors.textHint,
                               fontSize: 12,
@@ -145,7 +146,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: Text(
-                              'الاسم الجديد',
+                              AppLocalizationsAr.instance.editNewName,
                               style: context.textStyle.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: context.colors.onSurface,
@@ -184,10 +185,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                             validator: (val) {
                               if (val == null || val.trim().isEmpty) {
-                                return 'من فضلك أدخل الاسم الجديد';
+                                return AppLocalizationsAr.instance.validationEnterNewName;
                               }
                               if (val.trim().length < 3) {
-                                return 'الاسم يجب أن يكون 3 أحرف على الأقل';
+                                return AppLocalizationsAr.instance.validationNameMinChars;
                               }
                               return null;
                             },
@@ -229,7 +230,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                             ),
                                           )
                                         : Text(
-                                            'حفظ التغييرات',
+                                            AppLocalizationsAr.instance.editSaveChanges,
                                             style: context.textStyle.labelLarge?.copyWith(
                                               color: AppColors.white,
                                               fontWeight: FontWeight.bold,
@@ -257,7 +258,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       ),
                                     ),
                                     child: Text(
-                                      'إلغاء',
+                                      AppLocalizationsAr.instance.editCancel,
                                       style: context.textStyle.labelLarge?.copyWith(
                                         color: AppColors.textSecondary,
                                         fontWeight: FontWeight.bold,

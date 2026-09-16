@@ -61,9 +61,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
     );
     final hours = (course.durationMinutes / 60).toStringAsFixed(0);
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Column(
+    return Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
@@ -121,8 +119,7 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
             },
           ),
         ],
-      ),
-    );
+      );
   }
 
   Widget _buildTabContent() {
@@ -326,8 +323,8 @@ class _CourseDetailsBodyState extends State<CourseDetailsBody> {
           const SizedBox(height: 20),
           const Divider(color: AppColors.divider),
           const SizedBox(height: 12),
-          _buildReviewItem('أحمد محمد', 'شرح ممتاز جداً ومبسط ومفهوم!', 'منذ يومين'),
-          _buildReviewItem('سارة علي', 'المذكرات والأسئلة ساعدتني جداً في المراجعة.', 'منذ أسبوع'),
+          _buildReviewItem(AppLocalizationsAr.instance.reviewName1, AppLocalizationsAr.instance.reviewComment1, AppLocalizationsAr.instance.reviewTime1),
+          _buildReviewItem(AppLocalizationsAr.instance.reviewName2, AppLocalizationsAr.instance.reviewComment2, AppLocalizationsAr.instance.reviewTime2),
         ],
       ),
     );

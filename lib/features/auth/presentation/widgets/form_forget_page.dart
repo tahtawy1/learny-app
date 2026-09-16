@@ -16,11 +16,9 @@ class FormForgetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: keyForm,
-      child: Directionality(
-        textDirection: .rtl,
-        child: Container(
-          padding: EdgeInsets.only(right: 30, left: 30),
-          child: ListView(
+      child: Container(
+        padding: EdgeInsets.only(right: 30, left: 30),
+        child: ListView(
             children: [
               Container(
                 margin: EdgeInsets.only(top: 20),
@@ -75,7 +73,6 @@ class FormForgetPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

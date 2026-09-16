@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
+import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/core/theme/app_radius.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
@@ -35,7 +36,7 @@ class ProfileHeaderCard extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             Text(
-              user.name ?? 'أحمد محمد',
+              user.name ?? AppLocalizationsAr.instance.profileDefaultName,
               style: context.textStyle.headlineSmall?.copyWith(
                 color: AppColors.white,
                 fontWeight: FontWeight.bold,
@@ -49,7 +50,7 @@ class ProfileHeaderCard extends StatelessWidget {
                 borderRadius: AppRadius.full,
               ),
               child: Text(
-                'الصف الثالث الثانوي',
+                AppLocalizationsAr.instance.profileDefaultGrade,
                 style: context.textStyle.bodySmall?.copyWith(
                   color: AppColors.white.withValues(alpha: 0.95),
                   fontWeight: FontWeight.w600,

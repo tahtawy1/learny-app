@@ -84,9 +84,7 @@ class _VideoLessonViewState extends State<_VideoLessonView> {
           bottom: false,
           left: !_isFullScreen,
           right: !_isFullScreen,
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Column(
+          child: Column(
               children: [
                 // ── Top Navigation Bar (Back Button) ─────────────────────
                 if (!_isFullScreen)
@@ -285,7 +283,7 @@ class _VideoLessonViewState extends State<_VideoLessonView> {
                         child: LessonNavigation(
                           hasPrevious: true,
                           hasNext: true,
-                          progressText: 'الدرس 5 من 15',
+                          progressText: '${AppLocalizationsAr.instance.lessonProgress} 5 ${AppLocalizationsAr.instance.myCoursesLessonSuffix} 15',
                           onPrevious: () {},
                           onNext: () {},
                         ),
@@ -299,7 +297,6 @@ class _VideoLessonViewState extends State<_VideoLessonView> {
         ),
       ),
     ),
-  ),
-);
+  );
   }
 }

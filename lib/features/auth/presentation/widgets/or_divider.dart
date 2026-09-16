@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
+import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 import 'package:learny/core/theme/app_colors.dart';
 
 class OrDivider extends StatelessWidget {
   final String text;
 
-  const OrDivider({super.key, this.text = 'أو'});
+  const OrDivider({super.key, this.text = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class OrDivider extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            text,
+            text.isEmpty ? AppLocalizationsAr.instance.orDividerText : text,
             style: context.textStyle.bodyMedium?.copyWith(
               color: AppColors.textHint,
             ),

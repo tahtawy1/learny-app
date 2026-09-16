@@ -58,7 +58,8 @@ class MyCoursesBody extends StatelessWidget {
                       vertical: 4,
                     ),
                     itemCount: enrollments.length,
-                    separatorBuilder: (context, index) => const SizedBox(height: 16),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
                     itemBuilder: (context, index) {
                       final enrollment = enrollments[index];
                       final course = coursesMap[enrollment.courseId];
@@ -94,7 +95,6 @@ class _FilterBar extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      reverse: true, // RTL — start from right
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: items.map((item) {
@@ -103,12 +103,13 @@ class _FilterBar extends StatelessWidget {
           return Padding(
             padding: const EdgeInsetsDirectional.only(start: 8),
             child: GestureDetector(
-              onTap: () =>
-                  context.read<EnrollmentCubit>().changeFilter(filter),
+              onTap: () => context.read<EnrollmentCubit>().changeFilter(filter),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? context.colors.primary
@@ -121,8 +122,7 @@ class _FilterBar extends StatelessWidget {
                     color: isSelected
                         ? context.colors.onPrimary
                         : context.colors.onSurface,
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w400,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),
@@ -146,8 +146,8 @@ class _EmptyFiltered extends StatelessWidget {
     final message = filter == EnrollmentFilter.completed
         ? loc.myCoursesEmptyCompleted
         : filter == EnrollmentFilter.inProgress
-            ? loc.myCoursesEmptyInProgress
-            : loc.myCoursesEmptySubtitle;
+        ? loc.myCoursesEmptyInProgress
+        : loc.myCoursesEmptySubtitle;
 
     return Center(
       child: Column(

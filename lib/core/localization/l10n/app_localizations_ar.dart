@@ -162,8 +162,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get courseDetailsFeatureVideos => 'فيديوهات شرح بجودة عالية';
   String get courseDetailsFeaturePdfs => 'مذكرات وملخصات بصيغة PDF';
   String get courseDetailsFeatureQuizzes => 'اختبارات تقييمية بعد كل درس';
-  String get courseDetailsFeatureAccess =>
-      'وصول غير محدود للمحتوى في أي وقت';
+  String get courseDetailsFeatureAccess => 'وصول غير محدود للمحتوى في أي وقت';
   String get courseDetailsReviewsBasedOn => 'بناءً على 128 تقييم';
   String get courseDetailsContinueLearning => 'متابعة التعلم';
   String get courseMinutesSuffix => 'دقيقة';
@@ -190,4 +189,58 @@ class AppLocalizationsAr extends AppLocalizations {
   String get videoPlayerUnmute => 'إلغاء كتم الصوت';
   String get videoPlayerMute => 'كتم الصوت';
   String get videoPlayerPlaybackSpeed => 'سرعة التشغيل';
+  //Bottom Nav Bar
+  String get bottomNavHome => "الرئيسية";
+  String get bottomNavCourses => "الكورسات";
+  String get bottomNavMyCourses => "كورساتي";
+  String get bottomNavProfile => "الملف الشخصي";
+
+  // ==================== Profile ====================
+  String get profileUpdateSuccess => 'تم تحديث البيانات بنجاح';
+  String get profilePersonalInfo => 'المعلومات الشخصية';
+  String get profileName => 'الاسم';
+  String get profileEmail => 'البريد الإلكتروني';
+  String get profilePhone => 'الهاتف';
+  String get profileAboutPlatform => 'عن المنصة';
+  String get profileAboutDescription =>
+      'منصة تعليمية متخصصة في شرح مادة الأحياء للمرحلة الثانوية بطريقة حديثة ومبسطة تجمع بين المحتوى العلمي الدقيق وأساليب التعلم التفاعلي.';
+  String get profileMission => 'مهمتنا: تبسيط العلوم لكل طالب';
+  String get profileLearnMore => 'اعرف المزيد';
+  String get profileLogout => 'تسجيل الخروج';
+  String get profileDefaultGrade => 'الصف الثالث الثانوي';
+  String get profileDefaultName => 'أحمد محمد';
+
+  // ==================== Settings ====================
+  String get settingsTitle => 'الإعدادات';
+  String get settingsNotifications => 'تفضيلات الإشعارات';
+  String get settingsDarkMode => 'الوضع الداكن';
+  String get settingsLanguage => 'اللغة';
+  String get settingsArabic => 'العربية';
+
+  // ==================== Edit Profile ====================
+  String get editNameTitle => 'تعديل الاسم';
+  String get editCurrentNamePrefix => 'الاسم الحالي: ';
+  String get editNewName => 'الاسم الجديد';
+  String get editSaveChanges => 'حفظ التغييرات';
+  String get editCancel => 'إلغاء';
+  String get validationEnterNewName => 'من فضلك أدخل الاسم الجديد';
+  String get validationNameMinChars => 'الاسم يجب أن يكون 3 أحرف على الأقل';
+
+  // ==================== Enrollment ====================
+  String get enrollmentUnauthorized => 'يرجى تسجيل الدخول لعرض دوراتك';
+
+  // ==================== Lesson ====================
+  String get lessonProgress => 'الدرس';
+
+  // ==================== Reviews ====================
+  String get reviewName1 => 'أحمد محمد';
+  String get reviewComment1 => 'شرح ممتاز جداً ومبسط ومفهوم!';
+  String get reviewTime1 => 'منذ يومين';
+  String get reviewName2 => 'سارة علي';
+  String get reviewComment2 => 'المذكرات والأسئلة ساعدتني جداً في المراجعة.';
+  String get reviewTime2 => 'منذ أسبوع';
+
+  // ==================== Misc ====================
+  String get defaultInitials => 'أح';
+  String get orDividerText => 'أو';
 }

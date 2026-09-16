@@ -23,7 +23,6 @@ class _CoursesFilterBarState extends State<CoursesFilterBar> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: List.generate(_filters.length, (index) {
           final isSelected = _selectedIndex == index;
           return Padding(
@@ -48,8 +47,7 @@ class _CoursesFilterBarState extends State<CoursesFilterBar> {
                     color: isSelected
                         ? context.colors.onPrimary
                         : context.colors.onSurface,
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w400,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),
