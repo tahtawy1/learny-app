@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/auth/presentation/view_model/register_cubit/register_cubit.dart';
 import 'package:learny/features/auth/presentation/widgets/app_back_button.dart';
 import 'package:learny/features/auth/presentation/widgets/register_form_section.dart';
@@ -49,7 +49,7 @@ class RegisterPage extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          AppLocalizationsAr.instance.formRegisterPageTitle,
+                          AppLocalization.instance.formRegisterPageTitle,
                           style: context.textStyle.displayLarge?.copyWith(
                             fontWeight: FontWeight.w800,
                             fontSize: 27,
@@ -58,7 +58,7 @@ class RegisterPage extends StatelessWidget {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          AppLocalizationsAr.instance.formRegisterPageSubtitle,
+                          AppLocalization.instance.formRegisterPageSubtitle,
                           style: context.textStyle.bodySmall?.copyWith(
                             fontWeight: FontWeight.w100,
 

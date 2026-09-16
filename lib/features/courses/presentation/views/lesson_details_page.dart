@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/const/lesson_type.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/courses/domain/entities/lesson_entity.dart';
 import 'package:learny/features/courses/domain/entities/pdf_lesson_entity.dart';
 import 'package:learny/features/courses/domain/entities/quiz_lesson_entity.dart';
@@ -29,7 +29,9 @@ class LessonDetailsPage extends StatelessWidget {
       default:
         return Scaffold(
           appBar: AppBar(title: Text(lesson.title)),
-          body: Center(child: Text(AppLocalizationsAr.instance.lessonTypeNotSupported)),
+          body: Center(
+            child: Text(AppLocalization.instance.lessonTypeNotSupported),
+          ),
         );
     }
   }

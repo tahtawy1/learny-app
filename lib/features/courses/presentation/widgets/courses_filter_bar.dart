@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 class CoursesFilterBar extends StatefulWidget {
   const CoursesFilterBar({super.key});
@@ -13,9 +13,9 @@ class _CoursesFilterBarState extends State<CoursesFilterBar> {
   int _selectedIndex = 0;
 
   List<String> get _filters => [
-    AppLocalizationsAr.instance.coursesFilterAll,
-    AppLocalizationsAr.instance.coursesFilterSecondGrade,
-    AppLocalizationsAr.instance.coursesFilterThirdGrade,
+    AppLocalization.instance.coursesFilterAll,
+    AppLocalization.instance.coursesFilterSecondGrade,
+    AppLocalization.instance.coursesFilterThirdGrade,
   ];
 
   @override
@@ -23,7 +23,6 @@ class _CoursesFilterBarState extends State<CoursesFilterBar> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: List.generate(_filters.length, (index) {
           final isSelected = _selectedIndex == index;
           return Padding(
@@ -48,8 +47,7 @@ class _CoursesFilterBarState extends State<CoursesFilterBar> {
                     color: isSelected
                         ? context.colors.onPrimary
                         : context.colors.onSurface,
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w400,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
 import 'package:learny/features/enrollment/domain/entities/enrollment_entity.dart';
@@ -19,7 +19,7 @@ class MyCourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     final completed = enrollment.isCompleted;
     final progress = enrollment.progress;
     final completedCount = enrollment.completedLessonsCount.toInt();
@@ -50,7 +50,8 @@ class MyCourseCard extends StatelessWidget {
                 ? Image.network(
                     course!.imageUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => _PlaceholderImage(context),
+                    errorBuilder: (context, error, stackTrace) =>
+                        _PlaceholderImage(context),
                   )
                 : _PlaceholderImage(context),
           ),
@@ -107,12 +108,9 @@ class MyCourseCard extends StatelessWidget {
                   child: LinearProgressIndicator(
                     value: progress,
                     minHeight: 6,
-                    backgroundColor:
-                        context.colors.surfaceContainerHighest,
+                    backgroundColor: context.colors.surfaceContainerHighest,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      completed
-                          ? AppColors.success
-                          : context.colors.primary,
+                      completed ? AppColors.success : context.colors.primary,
                     ),
                   ),
                 ),
@@ -132,8 +130,11 @@ class MyCourseCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          icon: const Icon(Icons.verified_outlined,
-                              size: 16, color: AppColors.success),
+                          icon: const Icon(
+                            Icons.verified_outlined,
+                            size: 16,
+                            color: AppColors.success,
+                          ),
                           label: Text(
                             loc.myCoursesViewCertificate,
                             style: const TextStyle(color: AppColors.success),
@@ -148,8 +149,7 @@ class MyCourseCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          icon: const Icon(Icons.play_circle_outline,
-                              size: 16),
+                          icon: const Icon(Icons.play_circle_outline, size: 16),
                           label: Text(loc.myCoursesContinueButton),
                         ),
                 ),
@@ -168,7 +168,7 @@ class _StatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
@@ -178,7 +178,9 @@ class _StatusBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
-        isCompleted ? loc.myCoursesStatusCompleted : loc.myCoursesStatusInProgress,
+        isCompleted
+            ? loc.myCoursesStatusCompleted
+            : loc.myCoursesStatusInProgress,
         style: context.textStyle.labelSmall?.copyWith(
           color: isCompleted
               ? AppColors.success

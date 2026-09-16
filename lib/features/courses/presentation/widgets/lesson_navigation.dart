@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 class LessonNavigation extends StatelessWidget {
   final VoidCallback? onPrevious;
@@ -27,9 +27,7 @@ class LessonNavigation extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border(
-          top: BorderSide(color: Color(0xFFF1F5F9), width: 1.5),
-        ),
+        border: Border(top: BorderSide(color: Color(0xFFF1F5F9), width: 1.5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,7 +40,7 @@ class LessonNavigation extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  AppLocalizationsAr.instance.lessonNavigationPrevious,
+                  AppLocalization.instance.lessonNavigationPrevious,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -90,7 +88,7 @@ class LessonNavigation extends StatelessWidget {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  AppLocalizationsAr.instance.lessonNavigationNext,
+                  AppLocalization.instance.lessonNavigationNext,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,

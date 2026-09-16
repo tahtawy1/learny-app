@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
 import 'package:learny/features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 import 'package:learny/features/auth/presentation/widgets/app_outlined_button.dart';
@@ -49,68 +49,65 @@ class _LoginFormSectionState extends State<LoginFormSection> {
   Widget build(BuildContext context) {
     return Form(
       key: keyForm,
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: ListView(
-            children: [
-              const SizedBox(height: 30),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: ListView(
+          children: [
+            const SizedBox(height: 30),
 
-              Text(
-                AppLocalizationsAr.instance.formLoginPage,
-                style: context.textStyle.displayLarge?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 23,
-                  color: context.colors.onSurface,
-                ),
+            Text(
+              AppLocalization.instance.formLoginPage,
+              style: context.textStyle.displayLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+                fontSize: 23,
+                color: context.colors.onSurface,
               ),
+            ),
 
-              const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-              EmailInputField(controller: emailController),
+            EmailInputField(controller: emailController),
 
-              const SizedBox(height: 15),
+            const SizedBox(height: 15),
 
-              PasswordInputField(controller: passwordController),
+            PasswordInputField(controller: passwordController),
 
-              const SizedBox(height: 15),
+            const SizedBox(height: 15),
 
-              ForgotPasswordWidget(
-                onTap: () {
-                  context.push('/login/forget');
-                },
-              ),
+            ForgotPasswordWidget(
+              onTap: () {
+                context.push('/login/forget');
+              },
+            ),
 
-              const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-              BlocBuilder<LoginCubit, LoginState>(
-                builder: (context, state) {
-                  return PrimaryAuthButton(
-                    text: AppLocalizationsAr.instance.formLoginPage,
-                    onTap: () async {
-                      await login();
-                    },
-                    isLoading: state is LoginLoading,
-                  );
-                },
-              ),
+            BlocBuilder<LoginCubit, LoginState>(
+              builder: (context, state) {
+                return PrimaryAuthButton(
+                  text: AppLocalization.instance.formLoginPage,
+                  onTap: () async {
+                    await login();
+                  },
+                  isLoading: state is LoginLoading,
+                );
+              },
+            ),
 
-              const SizedBox(height: 25),
+            const SizedBox(height: 25),
 
-              const OrDivider(),
+            const OrDivider(),
 
-              const SizedBox(height: 25),
+            const SizedBox(height: 25),
 
-              AppOutlinedButton(
-                onPressed: () {
-                  context.push('/login/register');
-                },
-                text: AppLocalizationsAr.instance.formLoginPageCreateAccount,
-              ),
-              const SizedBox(height: 25),
-            ],
-          ),
+            AppOutlinedButton(
+              onPressed: () {
+                context.push('/login/register');
+              },
+              text: AppLocalization.instance.formLoginPageCreateAccount,
+            ),
+            const SizedBox(height: 25),
+          ],
         ),
       ),
     );

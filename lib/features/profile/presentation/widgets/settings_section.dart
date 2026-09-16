@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/core/theme/app_radius.dart';
 import 'package:learny/features/profile/presentation/widgets/profile_menu_item.dart';
@@ -34,7 +35,12 @@ class _SettingsSectionState extends State<SettingsSection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 4),
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 16,
+              bottom: 4,
+            ),
             child: Row(
               children: [
                 const Icon(
@@ -44,7 +50,7 @@ class _SettingsSectionState extends State<SettingsSection> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'الإعدادات',
+                  AppLocalization.instance.settingsTitle,
                   style: context.textStyle.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: context.colors.onSurface,
@@ -54,7 +60,7 @@ class _SettingsSectionState extends State<SettingsSection> {
             ),
           ),
           ProfileMenuItem(
-            title: 'تفضيلات الإشعارات',
+            title: AppLocalization.instance.settingsNotifications,
             icon: Icons.notifications_none_rounded,
             iconBackgroundColor: AppColors.teal,
             onTap: () {
@@ -63,7 +69,7 @@ class _SettingsSectionState extends State<SettingsSection> {
           ),
           Divider(height: 1, color: AppColors.border.withValues(alpha: 0.5)),
           ProfileMenuItem(
-            title: 'الوضع الداكن',
+            title: AppLocalization.instance.settingsDarkMode,
             icon: Icons.nightlight_round_outlined,
             iconBackgroundColor: const Color(0xFF6366F1),
             trailing: Transform.scale(
@@ -81,14 +87,14 @@ class _SettingsSectionState extends State<SettingsSection> {
           ),
           Divider(height: 1, color: AppColors.border.withValues(alpha: 0.5)),
           ProfileMenuItem(
-            title: 'اللغة',
+            title: AppLocalization.instance.settingsLanguage,
             icon: Icons.language_rounded,
             iconBackgroundColor: const Color(0xFF3B82F6),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'العربية',
+                  AppLocalization.instance.settingsArabic,
                   style: context.textStyle.bodySmall?.copyWith(
                     color: AppColors.textHint,
                     fontWeight: FontWeight.w600,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/core/theme/app_radius.dart';
 import 'package:learny/features/profile/presentation/view_model/profile_cubit.dart';
@@ -78,9 +79,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
               // 2. Dim / Background Layer
               Positioned.fill(
-                child: Container(
-                  color: Colors.black.withValues(alpha: 0.25),
-                ),
+                child: Container(color: Colors.black.withValues(alpha: 0.25)),
               ),
 
               // 3. Bottom Sheet Modal Card
@@ -88,7 +87,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 16,
+                  ),
                   decoration: BoxDecoration(
                     color: context.colors.surface,
                     borderRadius: const BorderRadius.only(
@@ -123,7 +125,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                           // Modal Title
                           Text(
-                            'تعديل الاسم',
+                            AppLocalization.instance.editNameTitle,
                             style: context.textStyle.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: context.colors.onSurface,
@@ -133,7 +135,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                           // Current Name Subtitle
                           Text(
-                            'الاسم الحالي: $currentName',
+                            '${AppLocalization.instance.editCurrentNamePrefix}$currentName',
                             style: context.textStyle.bodySmall?.copyWith(
                               color: AppColors.textHint,
                               fontSize: 12,
@@ -145,7 +147,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: Text(
-                              'الاسم الجديد',
+                              AppLocalization.instance.editNewName,
                               style: context.textStyle.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: context.colors.onSurface,
@@ -166,11 +168,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: AppRadius.sm,
-                                borderSide: const BorderSide(color: AppColors.primary),
+                                borderSide: const BorderSide(
+                                  color: AppColors.primary,
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: AppRadius.sm,
-                                borderSide: const BorderSide(color: AppColors.primary),
+                                borderSide: const BorderSide(
+                                  color: AppColors.primary,
+                                ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: AppRadius.sm,
@@ -184,10 +190,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                             validator: (val) {
                               if (val == null || val.trim().isEmpty) {
-                                return 'من فضلك أدخل الاسم الجديد';
+                                return AppLocalization
+                                    .instance
+                                    .validationEnterNewName;
                               }
                               if (val.trim().length < 3) {
-                                return 'الاسم يجب أن يكون 3 أحرف على الأقل';
+                                return AppLocalization
+                                    .instance
+                                    .validationNameMinChars;
                               }
                               return null;
                             },
@@ -205,9 +215,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     onPressed: isLoading
                                         ? null
                                         : () {
-                                            if (_formKey.currentState?.validate() ?? false) {
-                                              context.read<ProfileCubit>().updateUserProfile(
-                                                    name: _nameController.text.trim(),
+                                            if (_formKey.currentState
+                                                    ?.validate() ??
+                                                false) {
+                                              context
+                                                  .read<ProfileCubit>()
+                                                  .updateUserProfile(
+                                                    name: _nameController.text
+                                                        .trim(),
                                                   );
                                             }
                                           },
@@ -229,11 +244,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                             ),
                                           )
                                         : Text(
-                                            'حفظ التغييرات',
-                                            style: context.textStyle.labelLarge?.copyWith(
-                                              color: AppColors.white,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                            AppLocalization
+                                                .instance
+                                                .editSaveChanges,
+                                            style: context.textStyle.labelLarge
+                                                ?.copyWith(
+                                                  color: AppColors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
                                   ),
                                 ),
@@ -251,17 +269,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                             context.pop();
                                           },
                                     style: OutlinedButton.styleFrom(
-                                      side: const BorderSide(color: AppColors.border),
+                                      side: const BorderSide(
+                                        color: AppColors.border,
+                                      ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: AppRadius.sm,
                                       ),
                                     ),
                                     child: Text(
-                                      'إلغاء',
-                                      style: context.textStyle.labelLarge?.copyWith(
-                                        color: AppColors.textSecondary,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      AppLocalization.instance.editCancel,
+                                      style: context.textStyle.labelLarge
+                                          ?.copyWith(
+                                            color: AppColors.textSecondary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                   ),
                                 ),

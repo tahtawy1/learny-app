@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learny/core/localization/l10n/app_localizations.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 
 extension ColorSchemeExt on BuildContext {
   ColorScheme get colors => Theme.of(this).colorScheme;

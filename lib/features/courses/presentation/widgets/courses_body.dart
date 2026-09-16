@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
 import 'package:learny/features/courses/presentation/widgets/course_card.dart';
 import 'package:learny/features/courses/presentation/widgets/courses_app_bar.dart';
@@ -23,7 +23,7 @@ class CoursesBody extends StatelessWidget {
             child: courses.isEmpty
                 ? Center(
                     child: Text(
-                      AppLocalizationsAr.instance.coursesEmptyState,
+                      AppLocalization.instance.coursesEmptyState,
                       style: context.textStyle.bodyLarge,
                     ),
                   )

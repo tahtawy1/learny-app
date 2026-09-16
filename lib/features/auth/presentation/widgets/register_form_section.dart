@@ -38,56 +38,53 @@ class _RegisterFormSectionState extends State<RegisterFormSection> {
   Widget build(BuildContext context) {
     return Form(
       key: keyForm,
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: ListView(
-            children: [
-              const SizedBox(height: 30),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: ListView(
+          children: [
+            const SizedBox(height: 30),
 
-              NameInputField(controller: nameController),
-              const SizedBox(height: 15),
+            NameInputField(controller: nameController),
+            const SizedBox(height: 15),
 
-              EmailInputField(controller: emailController),
-              const SizedBox(height: 15),
+            EmailInputField(controller: emailController),
+            const SizedBox(height: 15),
 
-              PhoneInputField(controller: phoneController),
-              const SizedBox(height: 15),
+            PhoneInputField(controller: phoneController),
+            const SizedBox(height: 15),
 
-              PasswordInputField(controller: passwordController),
-              const SizedBox(height: 15),
+            PasswordInputField(controller: passwordController),
+            const SizedBox(height: 15),
 
-              BlocBuilder<RegisterCubit, RegisterState>(
-                builder: (context, state) {
-                  return RegisterBottomSection(
-                    onCreateAccount: () async {
-                      if (keyForm.currentState!.validate()) {
-                        final name = nameController.text.trim();
-                        final email = emailController.text.trim();
-                        final phone = phoneController.text.trim();
-                        final password = passwordController.text;
-                        final UserEntity userEntity = UserEntity(
-                          email: email,
-                          password: password,
-                          name: name,
-                          phone: phone,
-                        );
-                        await RegisterCubit.get(
-                          context,
-                        ).createUserWithEmailAndPassword(userEntity);
-                      }
-                    },
-                    isLoadingOnCreateAccount: state is RegisterLoading,
-                    onLogin: () {
-                      context.pop();
-                    },
-                  );
-                },
-              ),
-              SizedBox(height: 20),
-            ],
-          ),
+            BlocBuilder<RegisterCubit, RegisterState>(
+              builder: (context, state) {
+                return RegisterBottomSection(
+                  onCreateAccount: () async {
+                    if (keyForm.currentState!.validate()) {
+                      final name = nameController.text.trim();
+                      final email = emailController.text.trim();
+                      final phone = phoneController.text.trim();
+                      final password = passwordController.text;
+                      final UserEntity userEntity = UserEntity(
+                        email: email,
+                        password: password,
+                        name: name,
+                        phone: phone,
+                      );
+                      await RegisterCubit.get(
+                        context,
+                      ).createUserWithEmailAndPassword(userEntity);
+                    }
+                  },
+                  isLoadingOnCreateAccount: state is RegisterLoading,
+                  onLogin: () {
+                    context.pop();
+                  },
+                );
+              },
+            ),
+            SizedBox(height: 20),
+          ],
         ),
       ),
     );

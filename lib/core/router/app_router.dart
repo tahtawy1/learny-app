@@ -19,9 +19,10 @@ import 'package:learny/features/courses/presentation/views/courses_page.dart';
 import 'package:learny/features/courses/presentation/views/lesson_details_page.dart';
 import 'package:learny/features/courses/presentation/views/my_courses_page.dart';
 import 'package:learny/features/enrollment/presentation/cubit/enrollment_cubit.dart';
+import 'package:learny/features/home/presentation/views/home_page.dart';
 import 'package:learny/features/profile/presentation/view_model/profile_cubit.dart';
-import 'package:learny/features/profile/presentation/views/edit_profile_page.dart';
 import 'package:learny/features/profile/presentation/views/profile_page.dart';
+import 'package:learny/features/shell/presentation/views/main_shell.dart';
 import 'package:learny/features/splash/presentation/views/splash_page.dart';
 
 class AppRouter {
@@ -74,41 +75,64 @@ class AppRouter {
           );
         },
       ),
-      GoRoute(
-        path: '/profile',
-        builder: (context, state) => BlocProvider.value(
-          value: getIt<ProfileCubit>()..getCurrentUser(),
-          child: const ProfilePage(),
-        ),
-      ),
-      GoRoute(
-        path: '/edit_profile',
-        builder: (context, state) => BlocProvider.value(
-          value: getIt<ProfileCubit>(),
-          child: const EditProfilePage(),
-        ),
-      ),
-      GoRoute(
-        path: '/courses',
-        builder: (context, state) => BlocProvider<CourseCubit>(
-          create: (context) => getIt<CourseCubit>()..getCourses(),
-          child: const CoursesPage(),
-        ),
-      ),
-      GoRoute(
-        path: '/my_courses',
-        builder: (context, state) => BlocProvider<EnrollmentCubit>(
-          create: (context) => getIt<EnrollmentCubit>(),
-          child: const MyCoursesPage(),
-        ),
-      ),
-      GoRoute(
-        path: '/course_details',
-        builder: (context, state) {
-          final course = state.extra as CourseEntity;
-
-          return CourseDetailsPage(course: course);
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return MainShell(navigationShell: navigationShell);
         },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/home',
+                builder: (context, state) {
+                  return const HomePage();
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/courses',
+                builder: (context, state) {
+                  return BlocProvider<CourseCubit>(
+                    create: (_) => getIt<CourseCubit>()..getCourses(),
+                    child: const CoursesPage(),
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/my_courses',
+                builder: (context, state) {
+                  return BlocProvider<EnrollmentCubit>(
+                    create: (_) => getIt<EnrollmentCubit>(),
+                    child: const MyCoursesPage(),
+                  );
+                },
+              ),
+            ],
+          ),
+
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/profile',
+                builder: (context, state) {
+                  return BlocProvider.value(
+                    value: getIt<ProfileCubit>()..getCurrentUser(),
+                    child: const ProfilePage(),
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
       ),
       GoRoute(
         path: '/lesson_details',
@@ -116,6 +140,14 @@ class AppRouter {
           final lesson = state.extra as LessonEntity;
 
           return LessonDetailsPage(lesson: lesson);
+        },
+      ),
+      GoRoute(
+        path: '/course_details',
+        builder: (context, state) {
+          final course = state.extra as CourseEntity;
+
+          return CourseDetailsPage(course: course);
         },
       ),
     ],

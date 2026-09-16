@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 
 class UserAvatar extends StatelessWidget {
@@ -16,7 +17,8 @@ class UserAvatar extends StatelessWidget {
   final VoidCallback? onEditTap;
 
   String _getInitials(String? text) {
-    if (text == null || text.trim().isEmpty) return 'أح';
+    if (text == null || text.trim().isEmpty)
+      return AppLocalization.instance.defaultInitials;
     final parts = text.trim().split(RegExp(r'\s+'));
     if (parts.length == 1) {
       return parts[0].characters.take(2).toString();

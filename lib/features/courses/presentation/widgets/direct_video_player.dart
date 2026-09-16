@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:video_player/video_player.dart';
 
 class DirectVideoPlayer extends StatefulWidget {
@@ -70,16 +70,16 @@ class _DirectVideoPlayerState extends State<DirectVideoPlayer> {
         _controller!.addListener(_onControllerUpdate);
         _startHideTimer();
       }
-   } catch (e, st) {
-  debugPrint('VIDEO ERROR: $e');
-  debugPrintStack(stackTrace: st);
+    } catch (e, st) {
+      debugPrint('VIDEO ERROR: $e');
+      debugPrintStack(stackTrace: st);
 
-  if (mounted) {
-    setState(() {
-      _hasError = true;
-    });
-  }
-}
+      if (mounted) {
+        setState(() {
+          _hasError = true;
+        });
+      }
+    }
   }
 
   void _startHideTimer() {
@@ -238,7 +238,7 @@ class _DirectVideoPlayerState extends State<DirectVideoPlayer> {
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizationsAr.instance.videoPlayerError,
+              AppLocalization.instance.videoPlayerError,
               style: const TextStyle(color: Colors.white70, fontSize: 14),
             ),
           ],
@@ -273,306 +273,305 @@ class _DirectVideoPlayerState extends State<DirectVideoPlayer> {
             _onUserInteraction();
           }
         },
-        child: Directionality(
-          textDirection: TextDirection.ltr,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              // عرض الفيديو
-              Center(
-                child: AspectRatio(
-                  aspectRatio: _controller!.value.aspectRatio > 0
-                      ? _controller!.value.aspectRatio
-                      : 16 / 9,
-                  child: VideoPlayer(_controller!, key: _textureKey),
-                ),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            // عرض الفيديو
+            Center(
+              child: AspectRatio(
+                aspectRatio: _controller!.value.aspectRatio > 0
+                    ? _controller!.value.aspectRatio
+                    : 16 / 9,
+                child: VideoPlayer(_controller!, key: _textureKey),
               ),
+            ),
 
-              // زر التشغيل/الإيقاف في المنتصف (يختفي ويظهر بسلاسة)
-              AnimatedOpacity(
-                opacity: _showControls ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 250),
-                child: IgnorePointer(
-                  ignoring: !_showControls,
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: _togglePlayPause,
-                      child: Container(
-                        width: 58,
-                        height: 58,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF16A34A),
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(
-                                0xFF16A34A,
-                              ).withValues(alpha: 0.4),
-                              blurRadius: 18,
-                              spreadRadius: 2,
-                            ),
-                          ],
-                        ),
-                        child: Icon(
-                          isPlaying
-                              ? Icons.pause_rounded
-                              : Icons.play_arrow_rounded,
-                          size: 36,
-                          color: Colors.white,
-                        ),
+            // زر التشغيل/الإيقاف في المنتصف (يختفي ويظهر بسلاسة)
+            AnimatedOpacity(
+              opacity: _showControls ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 250),
+              child: IgnorePointer(
+                ignoring: !_showControls,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: _togglePlayPause,
+                    child: Container(
+                      width: 58,
+                      height: 58,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF16A34A),
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(
+                              0xFF16A34A,
+                            ).withValues(alpha: 0.4),
+                            blurRadius: 18,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        isPlaying
+                            ? Icons.pause_rounded
+                            : Icons.play_arrow_rounded,
+                        size: 36,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
               ),
+            ),
 
-              // شريط التحكم السفلي (يختفي ويظهر بسلاسة)
-              AnimatedOpacity(
-                opacity: _showControls ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 250),
-                child: IgnorePointer(
-                  ignoring: !_showControls,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.black.withValues(alpha: 0.85),
-                          Colors.transparent,
-                        ],
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // مؤشر التقدم
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            trackHeight: 3.5,
-                            thumbShape: const RoundSliderThumbShape(
-                              enabledThumbRadius: 6,
-                            ),
-                            overlayShape: const RoundSliderOverlayShape(
-                              overlayRadius: 10,
-                            ),
-                            activeTrackColor: const Color(0xFF16A34A),
-                            inactiveTrackColor: Colors.white.withValues(
-                              alpha: 0.3,
-                            ),
-                            thumbColor: Colors.white,
-                          ),
-                          child: Slider(
-                            value: position.inMilliseconds.toDouble().clamp(
-                              0.0,
-                              duration.inMilliseconds.toDouble() > 0
-                                  ? duration.inMilliseconds.toDouble()
-                                  : 1.0,
-                            ),
-                            min: 0.0,
-                            max: duration.inMilliseconds.toDouble() > 0
-                                ? duration.inMilliseconds.toDouble()
-                                : 1.0,
-                            onChanged: (val) {
-                              _onUserInteraction();
-                              _controller!.seekTo(
-                                Duration(milliseconds: val.toInt()),
-                              );
-                            },
-                          ),
-                        ),
-
-                        // أزرار التحكم
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 6),
-                          child: Row(
-                            children: [
-                              // زر ملء الشاشة
-                              IconButton(
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                                icon: Icon(
-                                  widget.isFullScreen
-                                      ? Icons.fullscreen_exit_rounded
-                                      : Icons.fullscreen_rounded,
-                                  color: Colors.white,
-                                  size: 24,
-                                ),
-                                onPressed: _toggleFullScreen,
-                              ),
-                              const SizedBox(width: 14),
-
-                              // تقديم 10 ثوانٍ
-                              GestureDetector(
-                                onTap: () {
-                                  _onUserInteraction();
-                                  final newPos =
-                                      position + const Duration(seconds: 10);
-                                  _controller!.seekTo(
-                                    newPos > duration ? duration : newPos,
-                                  );
-                                },
-                                child: const Icon(
-                                  Icons.fast_forward_rounded,
-                                  color: Colors.white,
-                                  size: 22,
-                                ),
-                              ),
-                              const SizedBox(width: 14),
-
-                              // ترجيع 10 ثوانٍ
-                              GestureDetector(
-                                onTap: () {
-                                  _onUserInteraction();
-                                  final newPos =
-                                      position - const Duration(seconds: 10);
-                                  _controller!.seekTo(
-                                    newPos < Duration.zero
-                                        ? Duration.zero
-                                        : newPos,
-                                  );
-                                },
-                                child: const Icon(
-                                  Icons.fast_rewind_rounded,
-                                  color: Colors.white,
-                                  size: 22,
-                                ),
-                              ),
-                              const SizedBox(width: 14),
-
-                              // زر كتم / تفعيل الصوت
-                              GestureDetector(
-                                onTap: _toggleMute,
-                                child: Tooltip(
-                                  message: _isMuted || _volume == 0
-                                      ? AppLocalizationsAr.instance.videoPlayerUnmute
-                                      : AppLocalizationsAr.instance.videoPlayerMute,
-                                  child: Icon(
-                                    _isMuted || _volume == 0
-                                        ? Icons.volume_off_rounded
-                                        : (_volume < 0.5
-                                              ? Icons.volume_down_rounded
-                                              : Icons.volume_up_rounded),
-                                    color: _isMuted || _volume == 0
-                                        ? Colors.redAccent
-                                        : Colors.white,
-                                    size: 22,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 6),
-
-                              // شريط التحكم بالصوت
-                              SizedBox(
-                                width: widget.isFullScreen ? 80 : 52,
-                                child: SliderTheme(
-                                  data: SliderTheme.of(context).copyWith(
-                                    trackHeight: 2.5,
-                                    thumbShape: const RoundSliderThumbShape(
-                                      enabledThumbRadius: 4,
-                                    ),
-                                    overlayShape: const RoundSliderOverlayShape(
-                                      overlayRadius: 8,
-                                    ),
-                                    activeTrackColor: const Color(0xFF16A34A),
-                                    inactiveTrackColor: Colors.white.withValues(
-                                      alpha: 0.3,
-                                    ),
-                                    thumbColor: Colors.white,
-                                  ),
-                                  child: Slider(
-                                    value: _isMuted ? 0.0 : _volume,
-                                    min: 0.0,
-                                    max: 1.0,
-                                    onChanged: _setVolume,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-
-                              // قائمة اختيار السرعة
-                              PopupMenuButton<double>(
-                                initialValue: _currentSpeed,
-                                tooltip: AppLocalizationsAr.instance.videoPlayerPlaybackSpeed,
-                                color: const Color(0xFF1E293B),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                onSelected: _setSpeed,
-                                itemBuilder: (context) => _speeds.map((speed) {
-                                  return PopupMenuItem<double>(
-                                    value: speed,
-                                    child: Text(
-                                      '${speed}x',
-                                      style: TextStyle(
-                                        color: _currentSpeed == speed
-                                            ? const Color(0xFF16A34A)
-                                            : Colors.white,
-                                        fontWeight: _currentSpeed == speed
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 6,
-                                    vertical: 2,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white38),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Text(
-                                    '${_currentSpeed}x',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              const Spacer(),
-
-                              // الوقت الحالي / الإجمالي
-                              Text(
-                                '${_formatDuration(position)} / ${_formatDuration(duration)}',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-
-                              // زر التشغيل / الإيقاف المؤقت
-                              GestureDetector(
-                                onTap: _togglePlayPause,
-                                child: Icon(
-                                  isPlaying
-                                      ? Icons.pause_rounded
-                                      : Icons.play_arrow_rounded,
-                                  color: Colors.white,
-                                  size: 24,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+            // شريط التحكم السفلي (يختفي ويظهر بسلاسة)
+            AnimatedOpacity(
+              opacity: _showControls ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 250),
+              child: IgnorePointer(
+                ignoring: !_showControls,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        Colors.black.withValues(alpha: 0.85),
+                        Colors.transparent,
                       ],
                     ),
                   ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // مؤشر التقدم
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          trackHeight: 3.5,
+                          thumbShape: const RoundSliderThumbShape(
+                            enabledThumbRadius: 6,
+                          ),
+                          overlayShape: const RoundSliderOverlayShape(
+                            overlayRadius: 10,
+                          ),
+                          activeTrackColor: const Color(0xFF16A34A),
+                          inactiveTrackColor: Colors.white.withValues(
+                            alpha: 0.3,
+                          ),
+                          thumbColor: Colors.white,
+                        ),
+                        child: Slider(
+                          value: position.inMilliseconds.toDouble().clamp(
+                            0.0,
+                            duration.inMilliseconds.toDouble() > 0
+                                ? duration.inMilliseconds.toDouble()
+                                : 1.0,
+                          ),
+                          min: 0.0,
+                          max: duration.inMilliseconds.toDouble() > 0
+                              ? duration.inMilliseconds.toDouble()
+                              : 1.0,
+                          onChanged: (val) {
+                            _onUserInteraction();
+                            _controller!.seekTo(
+                              Duration(milliseconds: val.toInt()),
+                            );
+                          },
+                        ),
+                      ),
+
+                      // أزرار التحكم
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: Row(
+                          children: [
+                            // زر ملء الشاشة
+                            IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              icon: Icon(
+                                widget.isFullScreen
+                                    ? Icons.fullscreen_exit_rounded
+                                    : Icons.fullscreen_rounded,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                              onPressed: _toggleFullScreen,
+                            ),
+                            const SizedBox(width: 14),
+
+                            // تقديم 10 ثوانٍ
+                            GestureDetector(
+                              onTap: () {
+                                _onUserInteraction();
+                                final newPos =
+                                    position + const Duration(seconds: 10);
+                                _controller!.seekTo(
+                                  newPos > duration ? duration : newPos,
+                                );
+                              },
+                              child: const Icon(
+                                Icons.fast_forward_rounded,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                            ),
+                            const SizedBox(width: 14),
+
+                            // ترجيع 10 ثوانٍ
+                            GestureDetector(
+                              onTap: () {
+                                _onUserInteraction();
+                                final newPos =
+                                    position - const Duration(seconds: 10);
+                                _controller!.seekTo(
+                                  newPos < Duration.zero
+                                      ? Duration.zero
+                                      : newPos,
+                                );
+                              },
+                              child: const Icon(
+                                Icons.fast_rewind_rounded,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                            ),
+                            const SizedBox(width: 14),
+
+                            // زر كتم / تفعيل الصوت
+                            GestureDetector(
+                              onTap: _toggleMute,
+                              child: Tooltip(
+                                message: _isMuted || _volume == 0
+                                    ? AppLocalization.instance.videoPlayerUnmute
+                                    : AppLocalization.instance.videoPlayerMute,
+                                child: Icon(
+                                  _isMuted || _volume == 0
+                                      ? Icons.volume_off_rounded
+                                      : (_volume < 0.5
+                                            ? Icons.volume_down_rounded
+                                            : Icons.volume_up_rounded),
+                                  color: _isMuted || _volume == 0
+                                      ? Colors.redAccent
+                                      : Colors.white,
+                                  size: 22,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+
+                            // شريط التحكم بالصوت
+                            SizedBox(
+                              width: widget.isFullScreen ? 80 : 52,
+                              child: SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  trackHeight: 2.5,
+                                  thumbShape: const RoundSliderThumbShape(
+                                    enabledThumbRadius: 4,
+                                  ),
+                                  overlayShape: const RoundSliderOverlayShape(
+                                    overlayRadius: 8,
+                                  ),
+                                  activeTrackColor: const Color(0xFF16A34A),
+                                  inactiveTrackColor: Colors.white.withValues(
+                                    alpha: 0.3,
+                                  ),
+                                  thumbColor: Colors.white,
+                                ),
+                                child: Slider(
+                                  value: _isMuted ? 0.0 : _volume,
+                                  min: 0.0,
+                                  max: 1.0,
+                                  onChanged: _setVolume,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+
+                            // قائمة اختيار السرعة
+                            PopupMenuButton<double>(
+                              initialValue: _currentSpeed,
+                              tooltip: AppLocalization
+                                  .instance
+                                  .videoPlayerPlaybackSpeed,
+                              color: const Color(0xFF1E293B),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              onSelected: _setSpeed,
+                              itemBuilder: (context) => _speeds.map((speed) {
+                                return PopupMenuItem<double>(
+                                  value: speed,
+                                  child: Text(
+                                    '${speed}x',
+                                    style: TextStyle(
+                                      color: _currentSpeed == speed
+                                          ? const Color(0xFF16A34A)
+                                          : Colors.white,
+                                      fontWeight: _currentSpeed == speed
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white38),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  '${_currentSpeed}x',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const Spacer(),
+
+                            // الوقت الحالي / الإجمالي
+                            Text(
+                              '${_formatDuration(position)} / ${_formatDuration(duration)}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+
+                            // زر التشغيل / الإيقاف المؤقت
+                            GestureDetector(
+                              onTap: _togglePlayPause,
+                              child: Icon(
+                                isPlaying
+                                    ? Icons.pause_rounded
+                                    : Icons.play_arrow_rounded,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

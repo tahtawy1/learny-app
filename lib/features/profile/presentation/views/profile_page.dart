@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/core/theme/app_radius.dart';
 import 'package:learny/features/auth/domain/entities/user_entity.dart';
@@ -34,8 +35,8 @@ class _ProfileView extends StatelessWidget {
           );
         } else if (state is ProfileUpdateSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('تم تحديث البيانات بنجاح'),
+            SnackBar(
+              content: Text(AppLocalization.instance.profileUpdateSuccess),
               backgroundColor: AppColors.success,
             ),
           );
@@ -129,27 +130,14 @@ class _ProfileView extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-                onPressed: () {
-                  context.push('/edit_profile');
-                },
-                icon: const Icon(
-                  Icons.edit_outlined,
-                  size: 20,
-                  color: AppColors.primary,
-                ),
-              ),
               Row(
                 children: [
                   Text(
-                    'المعلومات الشخصية',
+                    AppLocalization.instance.profilePersonalInfo,
                     style: context.textStyle.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: context.colors.onSurface,
@@ -163,26 +151,38 @@ class _ProfileView extends StatelessWidget {
                   ),
                 ],
               ),
+              IconButton(
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                onPressed: () {
+                  context.push('/edit_profile');
+                },
+                icon: const Icon(
+                  Icons.edit_outlined,
+                  size: 20,
+                  color: AppColors.primary,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 14),
           _buildInfoRow(
             context,
-            label: 'الاسم',
+            label: AppLocalization.instance.profileName,
             value: user.name ?? '',
             icon: Icons.person_outline,
           ),
           const SizedBox(height: 12),
           _buildInfoRow(
             context,
-            label: 'البريد الإلكتروني',
+            label: AppLocalization.instance.profileEmail,
             value: user.email,
             icon: Icons.email_outlined,
           ),
           const SizedBox(height: 12),
           _buildInfoRow(
             context,
-            label: 'الهاتف',
+            label: AppLocalization.instance.profilePhone,
             value: user.phone ?? '',
             icon: Icons.phone_iphone_outlined,
           ),
@@ -254,26 +254,26 @@ class _ProfileView extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                'عن المنصة',
-                style: context.textStyle.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.colors.onSurface,
-                ),
-              ),
-              const SizedBox(width: 8),
               const Icon(
                 Icons.info_outline_rounded,
                 size: 20,
                 color: AppColors.textSecondary,
               ),
+              const SizedBox(width: 8),
+
+              Text(
+                AppLocalization.instance.profileAboutPlatform,
+                style: context.textStyle.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: context.colors.onSurface,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
           Text(
-            'منصة تعليمية متخصصة في شرح مادة الأحياء للمرحلة الثانوية بطريقة حديثة ومبسطة تجمع بين المحتوى العلمي الدقيق وأساليب التعلم التفاعلي.',
+            AppLocalization.instance.profileAboutDescription,
             textAlign: TextAlign.center,
             style: context.textStyle.bodySmall?.copyWith(
               color: AppColors.textSecondary,
@@ -298,7 +298,7 @@ class _ProfileView extends StatelessWidget {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  'مهمتنا: تبسيط العلوم لكل طالب',
+                  AppLocalization.instance.profileMission,
                   style: context.textStyle.bodySmall?.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.w600,
@@ -319,7 +319,7 @@ class _ProfileView extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: AppRadius.sm),
               ),
               child: Text(
-                'اعرف المزيد',
+                AppLocalization.instance.profileLearnMore,
                 style: context.textStyle.labelLarge?.copyWith(
                   color: AppColors.teal,
                   fontWeight: FontWeight.bold,
@@ -363,7 +363,7 @@ class _ProfileView extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'تسجيل الخروج',
+                      AppLocalization.instance.profileLogout,
                       style: context.textStyle.bodyLarge?.copyWith(
                         color: AppColors.error,
                         fontWeight: FontWeight.bold,

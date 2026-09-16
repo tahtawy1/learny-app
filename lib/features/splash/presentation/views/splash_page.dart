@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/splash/presentation/widgets/three_dots_loading.dart';
 
 class SplashPage extends StatelessWidget {
@@ -8,7 +8,6 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Center(
         child: Column(
@@ -38,9 +37,7 @@ class SplashPage extends StatelessWidget {
                       color: context.colors.surface,
                       boxShadow: [
                         BoxShadow(
-                          color: context.colors.primary.withValues(
-                            alpha: 0.3,
-                          ),
+                          color: context.colors.primary.withValues(alpha: 0.3),
                           blurRadius: 30,
                           offset: const Offset(0, 10),
                         ),
@@ -60,7 +57,7 @@ class SplashPage extends StatelessWidget {
                         ],
                       ).createShader(bounds),
                       child: Text(
-                        AppLocalizationsAr.instance.nameApp,
+                        AppLocalization.instance.nameApp,
                         style: context.textStyle.displayLarge!.copyWith(
                           fontWeight: FontWeight.w900,
                           color: context.colors.surface,
@@ -72,7 +69,7 @@ class SplashPage extends StatelessWidget {
                     bottom: 52,
 
                     child: Text(
-                      AppLocalizationsAr.instance.nameAppEn,
+                      AppLocalization.instance.nameAppEn,
                       style: context.textStyle.displayLarge!.copyWith(
                         fontWeight: FontWeight.w900,
                         letterSpacing: 1.5,

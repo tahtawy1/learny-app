@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/courses/presentation/widgets/mycourses_body.dart';
 import 'package:learny/features/enrollment/presentation/cubit/enrollment_cubit.dart';
 import 'package:learny/features/enrollment/presentation/cubit/enrollment_state.dart';
@@ -54,9 +54,7 @@ class _MyCoursesPageState extends State<MyCoursesPage> {
                     ElevatedButton(
                       onPressed: () =>
                           context.read<EnrollmentCubit>().getMyEnrollments(),
-                      child: Text(
-                        AppLocalizationsAr.instance.coursesRetry,
-                      ),
+                      child: Text(AppLocalization.instance.coursesRetry),
                     ),
                   ],
                 ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
 import 'package:learny/features/enrollment/domain/entities/enrollment_entity.dart';
@@ -24,7 +24,7 @@ class MyCoursesBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
 
     return SafeArea(
       child: Column(
@@ -58,7 +58,8 @@ class MyCoursesBody extends StatelessWidget {
                       vertical: 4,
                     ),
                     itemCount: enrollments.length,
-                    separatorBuilder: (context, index) => const SizedBox(height: 16),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
                     itemBuilder: (context, index) {
                       final enrollment = enrollments[index];
                       final course = coursesMap[enrollment.courseId];
@@ -85,7 +86,7 @@ class _FilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     final items = [
       (EnrollmentFilter.all, loc.myCoursesFilterAll),
       (EnrollmentFilter.inProgress, loc.myCoursesFilterInProgress),
@@ -94,7 +95,6 @@ class _FilterBar extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      reverse: true, // RTL — start from right
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: items.map((item) {
@@ -103,12 +103,13 @@ class _FilterBar extends StatelessWidget {
           return Padding(
             padding: const EdgeInsetsDirectional.only(start: 8),
             child: GestureDetector(
-              onTap: () =>
-                  context.read<EnrollmentCubit>().changeFilter(filter),
+              onTap: () => context.read<EnrollmentCubit>().changeFilter(filter),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? context.colors.primary
@@ -121,8 +122,7 @@ class _FilterBar extends StatelessWidget {
                     color: isSelected
                         ? context.colors.onPrimary
                         : context.colors.onSurface,
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w400,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),
@@ -142,12 +142,12 @@ class _EmptyFiltered extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     final message = filter == EnrollmentFilter.completed
         ? loc.myCoursesEmptyCompleted
         : filter == EnrollmentFilter.inProgress
-            ? loc.myCoursesEmptyInProgress
-            : loc.myCoursesEmptySubtitle;
+        ? loc.myCoursesEmptyInProgress
+        : loc.myCoursesEmptySubtitle;
 
     return Center(
       child: Column(
@@ -179,7 +179,7 @@ class MyCoursesEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizationsAr.instance;
+    final loc = AppLocalization.instance;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
 import 'package:learny/core/extensions/snak_bar_message.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 import 'package:learny/features/auth/presentation/widgets/login_form_section.dart';
 
@@ -17,9 +17,8 @@ class LoginPage extends StatelessWidget {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          log(state.userModel.emailVerified.toString());
           if (state.userModel.emailVerified == true) {
-            context.go('/courses');
+            context.go('/home');
           } else {
             context.push("/email_verification", extra: state.userModel);
           }
@@ -52,7 +51,7 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      AppLocalizationsAr.instance.loginWelcome,
+                      AppLocalization.instance.loginWelcome,
                       style: context.textStyle.displayLarge?.copyWith(
                         fontWeight: FontWeight.w800,
                         fontSize: 27,
@@ -61,7 +60,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      AppLocalizationsAr.instance.loginSubtitle,
+                      AppLocalization.instance.loginSubtitle,
                       style: context.textStyle.bodySmall?.copyWith(
                         fontWeight: FontWeight.w100,
 

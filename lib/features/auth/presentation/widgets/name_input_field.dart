@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
+import 'package:learny/core/localization/l10n/app_localization.dart';
 import 'package:learny/core/theme/app_colors.dart';
 import 'package:learny/core/validators/validators.dart';
 import 'package:learny/features/auth/presentation/widgets/custom_auth_text_field.dart';
@@ -16,8 +16,8 @@ class NameInputField extends StatelessWidget {
       validator: AppValidators.name,
       keyboardType: TextInputType.name,
       fillColor: AppColors.border,
-      label: AppLocalizationsAr.instance.nameFieldLabel,
-      hint: AppLocalizationsAr.instance.nameFieldHint,
+      label: AppLocalization.instance.nameFieldLabel,
+      hint: AppLocalization.instance.nameFieldHint,
       prefixIcon: Icons.person_outline,
     );
   }
