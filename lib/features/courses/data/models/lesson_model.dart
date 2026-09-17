@@ -19,16 +19,65 @@ abstract class LessonModel extends LessonEntity {
     required super.isCompleted,
   });
   factory LessonModel.fromEntity(LessonEntity entity) {
-    switch (entity.type) {
-      case LessonType.video:
-        return VideoLessonModel.fromEntity(entity as VideoLessonEntity);
-      case LessonType.pdf:
-        return PdfLessonModel.fromEntity(entity as PdfLessonEntity);
-      case LessonType.quiz:
-        return QuizLessonModel.fromEntity(entity as QuizLessonEntity);
-      case LessonType.exam:
-        return ExamLessonModel.fromEntity(entity as ExamLessonEntity);
+    if (entity is LessonModel) return entity;
+    if (entity is VideoLessonEntity) {
+      return VideoLessonModel(
+        id: entity.id,
+        title: entity.title,
+        type: entity.type,
+        isLocked: entity.isLocked,
+        isCompleted: entity.isCompleted,
+        videoUrl: entity.videoUrl,
+        durationMinutes: entity.durationMinutes,
+      );
+    } else if (entity is PdfLessonEntity) {
+      return PdfLessonModel(
+        id: entity.id,
+        title: entity.title,
+        type: entity.type,
+        isLocked: entity.isLocked,
+        isCompleted: entity.isCompleted,
+        pdfUrl: entity.pdfUrl,
+      );
+    } else if (entity is QuizLessonEntity) {
+      return QuizLessonModel(
+        id: entity.id,
+        title: entity.title,
+        type: entity.type,
+        isLocked: entity.isLocked,
+        isCompleted: entity.isCompleted,
+        passingScore: entity.passingScore,
+        questions: entity.questions
+            .map(
+              (q) => QuestionModel(
+                id: q.id,
+                question: q.question,
+                options: q.options,
+                correctAnswer: q.correctAnswer,
+                score: q.score,
+                userAnswer: q.userAnswer,
+                answerExplanation: q.answerExplanation,
+              ),
+            )
+            .toList(),
+        durationMinutes: entity.durationMinutes,
+      );
+    } else if (entity is ExamLessonEntity) {
+      return ExamLessonModel(
+        id: entity.id,
+        title: entity.title,
+        type: entity.type,
+        isLocked: entity.isLocked,
+        isCompleted: entity.isCompleted,
+        questionsCount: entity.questionsCount,
+        totalScore: entity.totalScore,
+        durationMinutes: entity.durationMinutes,
+      );
     }
+
+    throw UnsupportedError(
+      'Unsupported lesson entity type: ${entity.runtimeType}',
+    );
   }
 
   Map<String, dynamic> toJson();
@@ -74,6 +123,7 @@ abstract class LessonModel extends LessonEntity {
           questions: (json['questions'] as List<dynamic>? ?? [])
               .map((e) => QuestionModel.fromJson(e))
               .toList(),
+          durationMinutes: json["durationMinutes"],
         );
 
       case LessonType.exam:

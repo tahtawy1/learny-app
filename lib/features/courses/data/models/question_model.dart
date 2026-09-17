@@ -18,7 +18,6 @@ class QuestionModel extends QuestionEntity {
       options: entity.options,
       correctAnswer: entity.correctAnswer,
       score: entity.score,
-
       userAnswer: entity.userAnswer,
       answerExplanation: entity.answerExplanation,
     );

@@ -10,7 +10,6 @@ class VideoLessonModel extends LessonModel implements VideoLessonEntity {
   VideoLessonModel({
     required super.id,
     required super.title,
-
     required super.type,
     required super.isLocked,
     required super.isCompleted,
@@ -34,7 +33,6 @@ class VideoLessonModel extends LessonModel implements VideoLessonEntity {
     return {
       'id': id,
       'title': title,
-
       'type': type.name,
       'isLocked': isLocked,
       'isCompleted': isCompleted,

@@ -8,23 +8,23 @@ class PdfLessonModel extends LessonModel implements PdfLessonEntity {
   PdfLessonModel({
     required super.id,
     required super.title,
-
     required super.type,
     required super.isLocked,
     required super.isCompleted,
     required this.pdfUrl,
   });
+
   factory PdfLessonModel.fromEntity(PdfLessonEntity entity) {
     return PdfLessonModel(
       id: entity.id,
       title: entity.title,
-
       type: entity.type,
       isLocked: entity.isLocked,
       isCompleted: entity.isCompleted,
       pdfUrl: entity.pdfUrl,
     );
   }
+
   @override
   Map<String, dynamic> toJson() {
     return {

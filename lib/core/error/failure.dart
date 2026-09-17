@@ -81,21 +81,18 @@ class AuthExceptionMapper {
 class CourseFailure extends Failure {
   const CourseFailure({required super.message});
 
-  factory CourseFailure.networkError() => CourseFailure(
-    message: AppLocalizationsAr.instance.courseFailureNetwork,
-  );
+  factory CourseFailure.networkError() =>
+      CourseFailure(message: AppLocalizationsAr.instance.courseFailureNetwork);
 
-  factory CourseFailure.timeout() => CourseFailure(
-    message: AppLocalizationsAr.instance.courseFailureTimeout,
-  );
+  factory CourseFailure.timeout() =>
+      CourseFailure(message: AppLocalizationsAr.instance.courseFailureTimeout);
 
   factory CourseFailure.resourceExhausted() => CourseFailure(
     message: AppLocalizationsAr.instance.courseFailureResourceExhausted,
   );
 
-  factory CourseFailure.unknown() => CourseFailure(
-    message: AppLocalizationsAr.instance.courseFailureUnknown,
-  );
+  factory CourseFailure.unknown() =>
+      CourseFailure(message: AppLocalizationsAr.instance.courseFailureUnknown);
 }
 
 class CourseExceptionMapper {
@@ -115,4 +112,17 @@ class CourseExceptionMapper {
         return CourseFailure.unknown();
     }
   }
+}
+
+class EnrollmentFailure extends Failure {
+  const EnrollmentFailure({required super.message});
+
+  factory EnrollmentFailure.networkError() =>
+      EnrollmentFailure(message: AppLocalizationsAr.instance.networkError);
+
+  factory EnrollmentFailure.unauthorized() =>
+      const EnrollmentFailure(message: 'يرجى تسجيل الدخول لعرض دوراتك');
+
+  factory EnrollmentFailure.unknown() =>
+      EnrollmentFailure(message: AppLocalizationsAr.instance.unexpectedError);
 }

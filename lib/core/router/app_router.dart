@@ -12,9 +12,13 @@ import 'package:learny/features/auth/presentation/views/forget_page.dart';
 import 'package:learny/features/auth/presentation/views/login_page.dart';
 import 'package:learny/features/auth/presentation/views/register_page.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
+import 'package:learny/features/courses/domain/entities/lesson_entity.dart';
 import 'package:learny/features/courses/presentation/view_model/cubit/course_cubit.dart';
 import 'package:learny/features/courses/presentation/views/course_details_page.dart';
 import 'package:learny/features/courses/presentation/views/courses_page.dart';
+import 'package:learny/features/courses/presentation/views/lesson_details_page.dart';
+import 'package:learny/features/courses/presentation/views/my_courses_page.dart';
+import 'package:learny/features/enrollment/presentation/cubit/enrollment_cubit.dart';
 import 'package:learny/features/profile/presentation/view_model/profile_cubit.dart';
 import 'package:learny/features/profile/presentation/views/edit_profile_page.dart';
 import 'package:learny/features/profile/presentation/views/profile_page.dart';
@@ -92,10 +96,27 @@ class AppRouter {
         ),
       ),
       GoRoute(
+        path: '/my_courses',
+        builder: (context, state) => BlocProvider<EnrollmentCubit>(
+          create: (context) => getIt<EnrollmentCubit>(),
+          child: const MyCoursesPage(),
+        ),
+      ),
+      GoRoute(
         path: '/course_details',
+        builder: (context, state) {
+          final course = state.extra as CourseEntity;
 
-        builder: (context, state) =>
-            CourseDetailsPage(courseEntity: state.extra as CourseEntity),
+          return CourseDetailsPage(course: course);
+        },
+      ),
+      GoRoute(
+        path: '/lesson_details',
+        builder: (context, state) {
+          final lesson = state.extra as LessonEntity;
+
+          return LessonDetailsPage(lesson: lesson);
+        },
       ),
     ],
   );

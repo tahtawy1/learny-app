@@ -17,7 +17,6 @@ class ExamLessonModel extends LessonModel implements ExamLessonEntity {
   ExamLessonModel({
     required super.id,
     required super.title,
-
     required super.type,
     required super.isLocked,
     required super.isCompleted,
@@ -25,11 +24,11 @@ class ExamLessonModel extends LessonModel implements ExamLessonEntity {
     required this.totalScore,
     required this.durationMinutes,
   });
+
   factory ExamLessonModel.fromEntity(ExamLessonEntity entity) {
     return ExamLessonModel(
       id: entity.id,
       title: entity.title,
-
       type: entity.type,
       isLocked: entity.isLocked,
       isCompleted: entity.isCompleted,
@@ -38,12 +37,12 @@ class ExamLessonModel extends LessonModel implements ExamLessonEntity {
       durationMinutes: entity.durationMinutes,
     );
   }
+
   @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
-
       'type': type.name,
       'isLocked': isLocked,
       'isCompleted': isCompleted,

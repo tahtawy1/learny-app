@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:learny/core/extensions/build_context.dart';
 import 'package:learny/core/localization/l10n/app_localizations_ar.dart';
 import 'package:learny/features/courses/domain/entities/course_entity.dart';
-import 'package:learny/features/courses/presentation/views/course_details_page.dart';
+import 'package:learny/features/courses/presentation/widgets/image_placeholder.dart';
 
 class CourseCard extends StatelessWidget {
   const CourseCard({super.key, required this.course});

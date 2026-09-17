@@ -16,8 +16,7 @@ class CourseSectionModel extends CourseSectionEntity {
       courseId: entity.courseId,
       title: entity.title,
       description: entity.description,
-
-      lessons: entity.lessons.map((e) => LessonModel.fromEntity(e)).toList(),
+      lessons: entity.lessons,
     );
   }
   factory CourseSectionModel.fromJson(Map<String, dynamic> json) {

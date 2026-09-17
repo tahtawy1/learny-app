@@ -6,16 +6,18 @@ class QuizLessonModel extends LessonModel implements QuizLessonEntity {
   /// درجة النجاح المطلوبة
   @override
   final double passingScore;
+
   @override
   final List<QuestionModel> questions;
+
   QuizLessonModel({
     required super.id,
     required super.title,
     required super.type,
     required super.isLocked,
     required super.isCompleted,
-
     required this.passingScore,
+    required this.durationMinutes,
     required this.questions,
   });
   factory QuizLessonModel.fromEntity(QuizLessonEntity entity) {
@@ -30,6 +32,7 @@ class QuizLessonModel extends LessonModel implements QuizLessonEntity {
       questions: entity.questions
           .map((e) => QuestionModel.fromEntity(e))
           .toList(),
+      durationMinutes: entity.durationMinutes,
     );
   }
   @override
@@ -41,7 +44,11 @@ class QuizLessonModel extends LessonModel implements QuizLessonEntity {
       'isLocked': isLocked,
       'isCompleted': isCompleted,
       'passingScore': passingScore,
+      'durationMinutes': durationMinutes,
       'questions': questions.map((e) => e.toJson()).toList(),
     };
   }
+
+  @override
+  int durationMinutes;
 }
